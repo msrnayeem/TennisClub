@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Assets/plugins/fontawesome-free/css/all.min.css">
+    
+    <link rel="stylesheet" href="~/Content/adminlte.css">
+    <link rel="stylesheet" href="~/Assets/css/custom.css" >
+</head>
+<body class="hold-transition sidebar-mini">
+    <!-- Site wrapper -->
+    <!-- jQuery -->
+    <script src="~/Assets/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="/Assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/Assets/js/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="/Assets/js/demo.js"></script>
+
+
+
+
+    <div class="wrapper">
+        @Html.Partial("~/Views/Shared/Component/_mainNavbar.cshtml")
+
+        @Html.Partial("~/Views/Shared/Component/_mainSidebar.cshtml")
+        <!-- Site wrapper -->
+        <div class="content-wrapper">
+            <section class="content mt-4">
+                @RenderBody()
+            </section>
+        </div>
+    </div>
+    <!-- ./wrapper -->
+
+
+
+
+
+</body>
+</html>
