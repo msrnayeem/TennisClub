@@ -32,7 +32,7 @@ namespace TennisWeb.Controllers
             {
                 Session["Role"] = role;
                 Session["Email"] = form["Email"];
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Dashboard", "User");
             }           
             else if (status == "blocked")
             {

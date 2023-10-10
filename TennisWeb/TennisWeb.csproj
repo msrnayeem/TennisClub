@@ -127,7 +127,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\CoachController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlayerController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filter\AdminAttribute.cs" />
     <Compile Include="Filter\CoachAttribute.cs" />
@@ -165,6 +168,8 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthService.cs" />
+    <Compile Include="Services\CoachService.cs" />
+    <Compile Include="Services\PlayerService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2300,9 +2305,14 @@
     <Content Include="Views\Shared\Component\_mainSidebar.cshtml" />
     <Content Include="Views\User\UserList.cshtml" />
     <Content Include="Views\User\Dashboard.cshtml" />
+    <Content Include="Views\User\PlayerList.cshtml" />
+    <Content Include="Views\User\CoachesList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Coach\" />
+    <Folder Include="Views\Player\" />
+    <Folder Include="Views\Schedule\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

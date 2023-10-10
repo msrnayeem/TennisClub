@@ -10,7 +10,7 @@
         <!-- Sidebar user (optional) -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                
+
                 <li class="nav-item">
                     <a href="@Url.Action("Dashboard", "User")" class="nav-link">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -25,7 +25,18 @@
                     </a>
                 </li>
 
-
+                <li class="nav-item">
+                    <a href="@Url.Action("CoachesList", "User")" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Coaches</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("PlayerList", "User")" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Players</p>
+                    </a>
+                </li>
 
             </ul>
         </nav>
