@@ -13,10 +13,11 @@ namespace TennisWeb.Controllers
         {
             return View();
         }
-        [Admin]
+
         public ActionResult UserList()
         {
-            return View();
+            var users = Services.UserService.GetUsers();
+            return View(users);
         }   
     }
 }
