@@ -1,6 +1,14 @@
-﻿@model List<TennisWeb.Models.user>
+﻿
 @{
-    ViewBag.Title = "CoachesList";
+    ViewBag.Title = "Slots";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Slots</h2>
+
+@model List<TennisWeb.Models.Slot>
+@{
+    ViewBag.Title = "SlotsList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -14,10 +22,10 @@
         <div class="container-fluid my-2">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Users</h1>
+                    <h1>Slots</h1>
                 </div>
                 <div class="col-sm-6 text-right">
-                    <a href="" class="btn btn-primary">New User</a>
+                    <a href="@Url.Action("Create", "Slot")" class="btn btn-primary">New Slot</a>
                 </div>
             </div>
         </div>
@@ -28,27 +36,27 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">User List</h3>
+                        <h3 class="card-title">Slot List</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-hover table-striped">
+                        <table id="slot_table" class="table table-bordered table-hover table-striped">
                             <thead>
                                 <tr>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Status(s)</th>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Time</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if (Model != null && Model.Any())
                                 {
-                                    foreach (var user in Model)
+                                    foreach (var slot in Model)
                                     {
                                         <tr>
-                                            <td>@user.email</td>
-                                            <td>@user.role </td>
-                                            <td>@user.status</td>
+                                            <td>@slot.id</td>
+                                            <td>@slot.name </td>
+                                            <td>@slot.time</td>
 
                                         </tr>
                                     }
@@ -56,7 +64,7 @@
                                 else
                                 {
                                     <tr class="text-center">
-                                        <td colspan="3">No Users Found</td>
+                                        <td colspan="3">No slots Found</td>
                                     </tr>
                                 }
 
@@ -79,7 +87,6 @@
 
 <script>
     $(function () {
-        $('#example1').DataTable();
+        $('#slot_table').DataTable();
     });
 </script>
-

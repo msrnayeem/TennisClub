@@ -131,6 +131,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
+    <Compile Include="Controllers\SlotController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filter\AdminAttribute.cs" />
     <Compile Include="Filter\CoachAttribute.cs" />
@@ -142,7 +143,13 @@
       <DependentUpon>TennisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\Match_players.cs">
+      <DependentUpon>TennisModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\playerInfo.cs">
+      <DependentUpon>TennisModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Slot.cs">
       <DependentUpon>TennisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
@@ -163,13 +170,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TennisModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Upcoming.cs">
+      <DependentUpon>TennisModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\user.cs">
       <DependentUpon>TennisModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\CoachService.cs" />
+    <Compile Include="Services\MatchService.cs" />
     <Compile Include="Services\PlayerService.cs" />
+    <Compile Include="Services\SlotService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2303,15 +2315,15 @@
     <Content Include="Views\Shared\Component\_header.cshtml" />
     <Content Include="Views\Shared\Component\_mainNavbar.cshtml" />
     <Content Include="Views\Shared\Component\_mainSidebar.cshtml" />
-    <Content Include="Views\User\UserList.cshtml" />
     <Content Include="Views\User\Dashboard.cshtml" />
-    <Content Include="Views\User\PlayerList.cshtml" />
-    <Content Include="Views\User\CoachesList.cshtml" />
+    <Content Include="Views\Slot\Index.cshtml" />
+    <Content Include="Views\User\UserList.cshtml" />
+    <Content Include="Views\Coach\Index.cshtml" />
+    <Content Include="Views\Player\Index.cshtml" />
+    <Content Include="Views\Slot\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Coach\" />
-    <Folder Include="Views\Player\" />
     <Folder Include="Views\Schedule\" />
   </ItemGroup>
   <ItemGroup>

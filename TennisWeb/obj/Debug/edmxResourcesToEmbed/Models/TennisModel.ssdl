@@ -14,6 +14,14 @@
     <Property Name="image" Type="nvarchar(max)" />
     <Property Name="joinDate" Type="date" />
   </EntityType>
+  <EntityType Name="Match_players">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="upcomings_id" Type="int" Nullable="false" />
+    <Property Name="player_id" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="playerInfo">
     <Key>
       <PropertyRef Name="id" />
@@ -28,6 +36,15 @@
     <Property Name="dob" Type="date" />
     <Property Name="joinDate" Type="date" />
   </EntityType>
+  <EntityType Name="Slots">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="time" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="status" Type="smallint" Nullable="false" />
+  </EntityType>
   <EntityType Name="sysdiagrams">
     <Key>
       <PropertyRef Name="diagram_id" />
@@ -37,6 +54,16 @@
     <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Upcomings">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="slot_id" Type="int" Nullable="false" />
+    <Property Name="coach_id" Type="int" Nullable="false" />
+    <Property Name="date" Type="date" Nullable="false" />
+    <Property Name="status" Type="smallint" Nullable="false" />
   </EntityType>
   <EntityType Name="users">
     <Key>
@@ -60,6 +87,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Match_players_playerInfo">
+    <End Role="playerInfo" Type="Self.playerInfo" Multiplicity="1" />
+    <End Role="Match_players" Type="Self.Match_players" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="playerInfo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Match_players">
+        <PropertyRef Name="player_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Match_players_Upcomings">
+    <End Role="Upcomings" Type="Self.Upcomings" Multiplicity="1" />
+    <End Role="Match_players" Type="Self.Match_players" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Upcomings">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Match_players">
+        <PropertyRef Name="upcomings_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_playerInfo_users">
     <End Role="users" Type="Self.users" Multiplicity="1" />
     <End Role="playerInfo" Type="Self.playerInfo" Multiplicity="*" />
@@ -72,18 +123,61 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Upcomings_coachInfo">
+    <End Role="coachInfo" Type="Self.coachInfo" Multiplicity="1" />
+    <End Role="Upcomings" Type="Self.Upcomings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="coachInfo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Upcomings">
+        <PropertyRef Name="coach_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Upcomings_Slots">
+    <End Role="Slots" Type="Self.Slots" Multiplicity="1" />
+    <End Role="Upcomings" Type="Self.Upcomings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Slots">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Upcomings">
+        <PropertyRef Name="slot_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="tennisModelStoreContainer">
     <EntitySet Name="coachInfo" EntityType="Self.coachInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Match_players" EntityType="Self.Match_players" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="playerInfo" EntityType="Self.playerInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Slots" EntityType="Self.Slots" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Upcomings" EntityType="Self.Upcomings" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_coachInfo_users" Association="Self.FK_coachInfo_users">
       <End Role="users" EntitySet="users" />
       <End Role="coachInfo" EntitySet="coachInfo" />
     </AssociationSet>
+    <AssociationSet Name="FK_Match_players_playerInfo" Association="Self.FK_Match_players_playerInfo">
+      <End Role="playerInfo" EntitySet="playerInfo" />
+      <End Role="Match_players" EntitySet="Match_players" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Match_players_Upcomings" Association="Self.FK_Match_players_Upcomings">
+      <End Role="Upcomings" EntitySet="Upcomings" />
+      <End Role="Match_players" EntitySet="Match_players" />
+    </AssociationSet>
     <AssociationSet Name="FK_playerInfo_users" Association="Self.FK_playerInfo_users">
       <End Role="users" EntitySet="users" />
       <End Role="playerInfo" EntitySet="playerInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Upcomings_coachInfo" Association="Self.FK_Upcomings_coachInfo">
+      <End Role="coachInfo" EntitySet="coachInfo" />
+      <End Role="Upcomings" EntitySet="Upcomings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Upcomings_Slots" Association="Self.FK_Upcomings_Slots">
+      <End Role="Slots" EntitySet="Slots" />
+      <End Role="Upcomings" EntitySet="Upcomings" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

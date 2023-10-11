@@ -20,16 +20,6 @@ namespace TennisWeb.Controllers
             return View(users);
         }
         
-        public ActionResult PlayerList()
-        {
-            var players = Services.PlayerService.GetPlayers();
-            return View(players);
-        }
-
-        public ActionResult CoachesList()
-        {
-            var coaches = Services.CoachService.GetCoaches();
-            return View(coaches);
-        }
+        
     }
 }

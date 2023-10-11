@@ -24,6 +24,7 @@ namespace TennisWeb.Models
         public int slot_id { get; set; }
         public int coach_id { get; set; }
         public System.DateTime date { get; set; }
+        public short status { get; set; }
     
         public virtual coachInfo coachInfo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -53,5 +53,35 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Match_players">
+      <EntityTypeMapping TypeName="tennisModel.Match_players">
+        <MappingFragment StoreEntitySet="Match_players">
+          <ScalarProperty Name="player_id" ColumnName="player_id" />
+          <ScalarProperty Name="upcomings_id" ColumnName="upcomings_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Slots">
+      <EntityTypeMapping TypeName="tennisModel.Slot">
+        <MappingFragment StoreEntitySet="Slots">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="time" ColumnName="time" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Upcomings">
+      <EntityTypeMapping TypeName="tennisModel.Upcoming">
+        <MappingFragment StoreEntitySet="Upcomings">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="date" ColumnName="date" />
+          <ScalarProperty Name="coach_id" ColumnName="coach_id" />
+          <ScalarProperty Name="slot_id" ColumnName="slot_id" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

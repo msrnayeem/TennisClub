@@ -14,6 +14,7 @@
     <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="joinDate" Type="DateTime" Precision="0" />
     <NavigationProperty Name="user" Relationship="Self.FK_coachInfo_users" FromRole="coachInfo" ToRole="users" />
+    <NavigationProperty Name="Upcomings" Relationship="tennisModel.FK_Upcomings_coachInfo" FromRole="coachInfo" ToRole="Upcoming" />
   </EntityType>
   <EntityType Name="playerInfo">
     <Key>
@@ -29,6 +30,7 @@
     <Property Name="dob" Type="DateTime" Precision="0" />
     <Property Name="joinDate" Type="DateTime" Precision="0" />
     <NavigationProperty Name="user" Relationship="Self.FK_playerInfo_users" FromRole="playerInfo" ToRole="users" />
+    <NavigationProperty Name="Match_players" Relationship="tennisModel.FK_Match_players_playerInfo" FromRole="playerInfo" ToRole="Match_players" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -89,5 +91,105 @@
       <End Role="users" EntitySet="users" />
       <End Role="playerInfo" EntitySet="playerInfoes" />
     </AssociationSet>
+    <EntitySet Name="Match_players" EntityType="tennisModel.Match_players" />
+    <EntitySet Name="Slots" EntityType="tennisModel.Slot" />
+    <EntitySet Name="Upcomings" EntityType="tennisModel.Upcoming" />
+    <AssociationSet Name="FK_Upcomings_coachInfo" Association="tennisModel.FK_Upcomings_coachInfo">
+      <End Role="coachInfo" EntitySet="coachInfoes" />
+      <End Role="Upcoming" EntitySet="Upcomings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Match_players_playerInfo" Association="tennisModel.FK_Match_players_playerInfo">
+      <End Role="playerInfo" EntitySet="playerInfoes" />
+      <End Role="Match_players" EntitySet="Match_players" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Match_players_Upcomings" Association="tennisModel.FK_Match_players_Upcomings">
+      <End Role="Upcoming" EntitySet="Upcomings" />
+      <End Role="Match_players" EntitySet="Match_players" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Upcomings_Slots" Association="tennisModel.FK_Upcomings_Slots">
+      <End Role="Slot" EntitySet="Slots" />
+      <End Role="Upcoming" EntitySet="Upcomings" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Match_players">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="upcomings_id" Type="Int32" Nullable="false" />
+    <Property Name="player_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="playerInfo" Relationship="tennisModel.FK_Match_players_playerInfo" FromRole="Match_players" ToRole="playerInfo" />
+    <NavigationProperty Name="Upcoming" Relationship="tennisModel.FK_Match_players_Upcomings" FromRole="Match_players" ToRole="Upcoming" />
+  </EntityType>
+  <EntityType Name="Slot">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="time" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Upcomings" Relationship="tennisModel.FK_Upcomings_Slots" FromRole="Slot" ToRole="Upcoming" />
+    <Property Name="status" Type="Int16" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Upcoming">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="slot_id" Type="Int32" Nullable="false" />
+    <Property Name="coach_id" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="coachInfo" Relationship="tennisModel.FK_Upcomings_coachInfo" FromRole="Upcoming" ToRole="coachInfo" />
+    <NavigationProperty Name="Match_players" Relationship="tennisModel.FK_Match_players_Upcomings" FromRole="Upcoming" ToRole="Match_players" />
+    <NavigationProperty Name="Slot" Relationship="tennisModel.FK_Upcomings_Slots" FromRole="Upcoming" ToRole="Slot" />
+    <Property Name="status" Type="Int16" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Upcomings_coachInfo">
+    <End Type="tennisModel.coachInfo" Role="coachInfo" Multiplicity="1" />
+    <End Type="tennisModel.Upcoming" Role="Upcoming" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="coachInfo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Upcoming">
+        <PropertyRef Name="coach_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Match_players_playerInfo">
+    <End Type="tennisModel.playerInfo" Role="playerInfo" Multiplicity="1" />
+    <End Type="tennisModel.Match_players" Role="Match_players" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="playerInfo">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Match_players">
+        <PropertyRef Name="player_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Match_players_Upcomings">
+    <End Type="tennisModel.Upcoming" Role="Upcoming" Multiplicity="1" />
+    <End Type="tennisModel.Match_players" Role="Match_players" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Upcoming">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Match_players">
+        <PropertyRef Name="upcomings_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Upcomings_Slots">
+    <End Type="tennisModel.Slot" Role="Slot" Multiplicity="1" />
+    <End Type="tennisModel.Upcoming" Role="Upcoming" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Slot">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Upcoming">
+        <PropertyRef Name="slot_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

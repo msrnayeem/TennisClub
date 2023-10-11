@@ -11,7 +11,8 @@ namespace TennisWeb.Controllers
         // GET: Coach
         public ActionResult Index()
         {
-            return View();
+            var coaches = Services.CoachService.GetCoaches();
+            return View(coaches);
         }
     }
 }

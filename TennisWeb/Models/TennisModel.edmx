@@ -48,6 +48,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="time" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="status" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -67,6 +68,7 @@
           <Property Name="slot_id" Type="int" Nullable="false" />
           <Property Name="coach_id" Type="int" Nullable="false" />
           <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="status" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="users">
           <Key>
@@ -316,6 +318,7 @@
           <Property Name="name" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="time" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Upcomings" Relationship="tennisModel.FK_Upcomings_Slots" FromRole="Slot" ToRole="Upcoming" />
+          <Property Name="status" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="Upcoming">
           <Key>
@@ -328,6 +331,7 @@
           <NavigationProperty Name="coachInfo" Relationship="tennisModel.FK_Upcomings_coachInfo" FromRole="Upcoming" ToRole="coachInfo" />
           <NavigationProperty Name="Match_players" Relationship="tennisModel.FK_Match_players_Upcomings" FromRole="Upcoming" ToRole="Match_players" />
           <NavigationProperty Name="Slot" Relationship="tennisModel.FK_Upcomings_Slots" FromRole="Upcoming" ToRole="Slot" />
+          <Property Name="status" Type="Int16" Nullable="false" />
         </EntityType>
         <Association Name="FK_Upcomings_coachInfo">
           <End Type="tennisModel.coachInfo" Role="coachInfo" Multiplicity="1" />
@@ -447,6 +451,7 @@
           <EntitySetMapping Name="Slots">
             <EntityTypeMapping TypeName="tennisModel.Slot">
               <MappingFragment StoreEntitySet="Slots">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="time" ColumnName="time" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
@@ -456,6 +461,7 @@
           <EntitySetMapping Name="Upcomings">
             <EntityTypeMapping TypeName="tennisModel.Upcoming">
               <MappingFragment StoreEntitySet="Upcomings">
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="date" ColumnName="date" />
                 <ScalarProperty Name="coach_id" ColumnName="coach_id" />
                 <ScalarProperty Name="slot_id" ColumnName="slot_id" />
