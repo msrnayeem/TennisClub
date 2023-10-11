@@ -152,6 +152,7 @@
     <Compile Include="Models\Slot.cs">
       <DependentUpon>TennisModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SlotModel.cs" />
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>TennisModel.tt</DependentUpon>
     </Compile>

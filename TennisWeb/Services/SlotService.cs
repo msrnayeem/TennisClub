@@ -10,6 +10,7 @@ namespace TennisWeb.Services
     {
         public static bool CreateSlot(string Name, string Start, string End)
         {
+
             using (var db = new tennisEntities())
             {
                 Slot newSlot = new Slot
@@ -24,5 +25,22 @@ namespace TennisWeb.Services
                 
             }
         }
+
+        public static bool DeleteSlot(int id)
+        {
+            using (var db = new tennisEntities())
+            {
+                var slot = db.Slots.Find(id);
+                if (slot == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    db.Slots.Remove(slot);
+                    return db.SaveChanges() > 0;
+                }
+            }
+        }   
     }
 }

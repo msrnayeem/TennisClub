@@ -6,20 +6,24 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-4">
-            <form method="post" action="@Url.Action("Store", "Slot")">
+            @if (!string.IsNullOrEmpty(ViewBag.Error))
+            {
+                <div class="error">@ViewBag.Error</div>
+            }
+            <form method="post" action="@Url.Action("Store", "Slot")" id="slot-form">
                 <div class="form-group">
                     <label for="start-time">Slot Name</label>
                     <input type="text" class="form-control" id="slot-name" name="name" required>
                 </div>
                 <div class="form-group">
                     <label for="start-time">Start Time:</label>
-                    <input type="time" class="form-control" id="start-time" required>
+                    <input type="time" class="form-control" id="start-time"  name="start" required>
                 </div>
                 <div class="form-group">
                     <label for="end-time">End Time:</label>
-                    <input type="time" class="form-control" id="end-time" required>
+                    <input type="time" class="form-control" id="end-time" name="end" required>
                 </div>
-                <button class="btn btn-primary" id="submit-btn">Submit</button>
+                <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
             </form>
         </div>
     </div>
@@ -27,17 +31,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#submit-btn').click(function() {
+        $('#slot-form').submit(function (event) {
             var startTime = $('#start-time').val();
             var endTime = $('#end-time').val();
-
-            // Check if end time is greater than or equal to start time
             if (endTime < startTime) {
                 alert('End time cannot be smaller than start time!');
-            } else {
-                // Do something with the valid time range, for example, send it to the server
-                console.log('Start Time: ' + startTime);
-                console.log('End Time: ' + endTime);
+                event.preventDefault(); 
             }
         });
     });
