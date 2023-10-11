@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="tennisModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="tennisModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="coachInfo">
           <Key>
             <PropertyRef Name="id" />
@@ -18,6 +18,14 @@
           <Property Name="userId" Type="int" Nullable="false" />
           <Property Name="image" Type="nvarchar(max)" />
           <Property Name="joinDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Match_players">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="upcomings_id" Type="int" Nullable="false" />
+          <Property Name="player_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="playerInfo">
           <Key>
@@ -33,6 +41,14 @@
           <Property Name="dob" Type="date" />
           <Property Name="joinDate" Type="date" />
         </EntityType>
+        <EntityType Name="Slots">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="time" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -42,6 +58,15 @@
           <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Upcomings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="slot_id" Type="int" Nullable="false" />
+          <Property Name="coach_id" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="users">
           <Key>
@@ -65,6 +90,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Match_players_playerInfo">
+          <End Role="playerInfo" Type="Self.playerInfo" Multiplicity="1" />
+          <End Role="Match_players" Type="Self.Match_players" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="playerInfo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Match_players">
+              <PropertyRef Name="player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_players_Upcomings">
+          <End Role="Upcomings" Type="Self.Upcomings" Multiplicity="1" />
+          <End Role="Match_players" Type="Self.Match_players" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Upcomings">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Match_players">
+              <PropertyRef Name="upcomings_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_playerInfo_users">
           <End Role="users" Type="Self.users" Multiplicity="1" />
           <End Role="playerInfo" Type="Self.playerInfo" Multiplicity="*" />
@@ -77,22 +126,64 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Upcomings_coachInfo">
+          <End Role="coachInfo" Type="Self.coachInfo" Multiplicity="1" />
+          <End Role="Upcomings" Type="Self.Upcomings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="coachInfo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Upcomings">
+              <PropertyRef Name="coach_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Upcomings_Slots">
+          <End Role="Slots" Type="Self.Slots" Multiplicity="1" />
+          <End Role="Upcomings" Type="Self.Upcomings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Slots">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Upcomings">
+              <PropertyRef Name="slot_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="tennisModelStoreContainer">
           <EntitySet Name="coachInfo" EntityType="Self.coachInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Match_players" EntityType="Self.Match_players" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="playerInfo" EntityType="Self.playerInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Slots" EntityType="Self.Slots" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Upcomings" EntityType="Self.Upcomings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_coachInfo_users" Association="Self.FK_coachInfo_users">
             <End Role="users" EntitySet="users" />
             <End Role="coachInfo" EntitySet="coachInfo" />
           </AssociationSet>
+          <AssociationSet Name="FK_Match_players_playerInfo" Association="Self.FK_Match_players_playerInfo">
+            <End Role="playerInfo" EntitySet="playerInfo" />
+            <End Role="Match_players" EntitySet="Match_players" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_players_Upcomings" Association="Self.FK_Match_players_Upcomings">
+            <End Role="Upcomings" EntitySet="Upcomings" />
+            <End Role="Match_players" EntitySet="Match_players" />
+          </AssociationSet>
           <AssociationSet Name="FK_playerInfo_users" Association="Self.FK_playerInfo_users">
             <End Role="users" EntitySet="users" />
             <End Role="playerInfo" EntitySet="playerInfo" />
           </AssociationSet>
+          <AssociationSet Name="FK_Upcomings_coachInfo" Association="Self.FK_Upcomings_coachInfo">
+            <End Role="coachInfo" EntitySet="coachInfo" />
+            <End Role="Upcomings" EntitySet="Upcomings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Upcomings_Slots" Association="Self.FK_Upcomings_Slots">
+            <End Role="Slots" EntitySet="Slots" />
+            <End Role="Upcomings" EntitySet="Upcomings" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="tennisModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -110,6 +201,7 @@
           <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="joinDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="user" Relationship="Self.FK_coachInfo_users" FromRole="coachInfo" ToRole="users" />
+          <NavigationProperty Name="Upcomings" Relationship="tennisModel.FK_Upcomings_coachInfo" FromRole="coachInfo" ToRole="Upcoming" />
         </EntityType>
         <EntityType Name="playerInfo">
           <Key>
@@ -125,6 +217,7 @@
           <Property Name="dob" Type="DateTime" Precision="0" />
           <Property Name="joinDate" Type="DateTime" Precision="0" />
           <NavigationProperty Name="user" Relationship="Self.FK_playerInfo_users" FromRole="playerInfo" ToRole="users" />
+          <NavigationProperty Name="Match_players" Relationship="tennisModel.FK_Match_players_playerInfo" FromRole="playerInfo" ToRole="Match_players" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -185,7 +278,105 @@
             <End Role="users" EntitySet="users" />
             <End Role="playerInfo" EntitySet="playerInfoes" />
           </AssociationSet>
+          <EntitySet Name="Match_players" EntityType="tennisModel.Match_players" />
+          <EntitySet Name="Slots" EntityType="tennisModel.Slot" />
+          <EntitySet Name="Upcomings" EntityType="tennisModel.Upcoming" />
+          <AssociationSet Name="FK_Upcomings_coachInfo" Association="tennisModel.FK_Upcomings_coachInfo">
+            <End Role="coachInfo" EntitySet="coachInfoes" />
+            <End Role="Upcoming" EntitySet="Upcomings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_players_playerInfo" Association="tennisModel.FK_Match_players_playerInfo">
+            <End Role="playerInfo" EntitySet="playerInfoes" />
+            <End Role="Match_players" EntitySet="Match_players" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Match_players_Upcomings" Association="tennisModel.FK_Match_players_Upcomings">
+            <End Role="Upcoming" EntitySet="Upcomings" />
+            <End Role="Match_players" EntitySet="Match_players" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Upcomings_Slots" Association="tennisModel.FK_Upcomings_Slots">
+            <End Role="Slot" EntitySet="Slots" />
+            <End Role="Upcoming" EntitySet="Upcomings" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Match_players">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="upcomings_id" Type="Int32" Nullable="false" />
+          <Property Name="player_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="playerInfo" Relationship="tennisModel.FK_Match_players_playerInfo" FromRole="Match_players" ToRole="playerInfo" />
+          <NavigationProperty Name="Upcoming" Relationship="tennisModel.FK_Match_players_Upcomings" FromRole="Match_players" ToRole="Upcoming" />
+        </EntityType>
+        <EntityType Name="Slot">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="time" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Upcomings" Relationship="tennisModel.FK_Upcomings_Slots" FromRole="Slot" ToRole="Upcoming" />
+        </EntityType>
+        <EntityType Name="Upcoming">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="slot_id" Type="Int32" Nullable="false" />
+          <Property Name="coach_id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="coachInfo" Relationship="tennisModel.FK_Upcomings_coachInfo" FromRole="Upcoming" ToRole="coachInfo" />
+          <NavigationProperty Name="Match_players" Relationship="tennisModel.FK_Match_players_Upcomings" FromRole="Upcoming" ToRole="Match_players" />
+          <NavigationProperty Name="Slot" Relationship="tennisModel.FK_Upcomings_Slots" FromRole="Upcoming" ToRole="Slot" />
+        </EntityType>
+        <Association Name="FK_Upcomings_coachInfo">
+          <End Type="tennisModel.coachInfo" Role="coachInfo" Multiplicity="1" />
+          <End Type="tennisModel.Upcoming" Role="Upcoming" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="coachInfo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Upcoming">
+              <PropertyRef Name="coach_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_players_playerInfo">
+          <End Type="tennisModel.playerInfo" Role="playerInfo" Multiplicity="1" />
+          <End Type="tennisModel.Match_players" Role="Match_players" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="playerInfo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Match_players">
+              <PropertyRef Name="player_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Match_players_Upcomings">
+          <End Type="tennisModel.Upcoming" Role="Upcoming" Multiplicity="1" />
+          <End Type="tennisModel.Match_players" Role="Match_players" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Upcoming">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Match_players">
+              <PropertyRef Name="upcomings_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Upcomings_Slots">
+          <End Type="tennisModel.Slot" Role="Slot" Multiplicity="1" />
+          <End Type="tennisModel.Upcoming" Role="Upcoming" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Slot">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Upcoming">
+              <PropertyRef Name="slot_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -240,6 +431,34 @@
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Match_players">
+            <EntityTypeMapping TypeName="tennisModel.Match_players">
+              <MappingFragment StoreEntitySet="Match_players">
+                <ScalarProperty Name="player_id" ColumnName="player_id" />
+                <ScalarProperty Name="upcomings_id" ColumnName="upcomings_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Slots">
+            <EntityTypeMapping TypeName="tennisModel.Slot">
+              <MappingFragment StoreEntitySet="Slots">
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Upcomings">
+            <EntityTypeMapping TypeName="tennisModel.Upcoming">
+              <MappingFragment StoreEntitySet="Upcomings">
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="coach_id" ColumnName="coach_id" />
+                <ScalarProperty Name="slot_id" ColumnName="slot_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

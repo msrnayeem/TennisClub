@@ -11,6 +11,13 @@
         <EntityTypeShape EntityType="tennisModel.user" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
         <AssociationConnector Association="tennisModel.FK_coachInfo_users" ManuallyRouted="false" />
         <AssociationConnector Association="tennisModel.FK_playerInfo_users" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="tennisModel.Match_players" Width="1.5" PointX="7.5" PointY="4.75" />
+        <EntityTypeShape EntityType="tennisModel.Slot" Width="1.5" PointX="3" PointY="9.75" />
+        <EntityTypeShape EntityType="tennisModel.Upcoming" Width="1.5" PointX="5.25" PointY="3.5" />
+        <AssociationConnector Association="tennisModel.FK_Upcomings_coachInfo" />
+        <AssociationConnector Association="tennisModel.FK_Match_players_playerInfo" />
+        <AssociationConnector Association="tennisModel.FK_Match_players_Upcomings" />
+        <AssociationConnector Association="tennisModel.FK_Upcomings_Slots" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -29,5 +29,8 @@ namespace TennisWeb.Models
         public virtual DbSet<playerInfo> playerInfoes { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<Match_players> Match_players { get; set; }
+        public virtual DbSet<Slot> Slots { get; set; }
+        public virtual DbSet<Upcoming> Upcomings { get; set; }
     }
 }

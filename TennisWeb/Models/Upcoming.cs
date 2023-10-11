@@ -12,26 +12,22 @@ namespace TennisWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class coachInfo
+    public partial class Upcoming
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public coachInfo()
+        public Upcoming()
         {
-            this.Upcomings = new HashSet<Upcoming>();
+            this.Match_players = new HashSet<Match_players>();
         }
     
         public int id { get; set; }
-        public string name { get; set; }
-        public string address { get; set; }
-        public Nullable<System.DateTime> dob { get; set; }
-        public string phone { get; set; }
-        public string description { get; set; }
-        public int userId { get; set; }
-        public string image { get; set; }
-        public Nullable<System.DateTime> joinDate { get; set; }
+        public int slot_id { get; set; }
+        public int coach_id { get; set; }
+        public System.DateTime date { get; set; }
     
-        public virtual user user { get; set; }
+        public virtual coachInfo coachInfo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Upcoming> Upcomings { get; set; }
+        public virtual ICollection<Match_players> Match_players { get; set; }
+        public virtual Slot Slot { get; set; }
     }
 }

@@ -14,6 +14,12 @@ namespace TennisWeb.Models
     
     public partial class playerInfo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public playerInfo()
+        {
+            this.Match_players = new HashSet<Match_players>();
+        }
+    
         public int id { get; set; }
         public string name { get; set; }
         public string address { get; set; }
@@ -25,5 +31,7 @@ namespace TennisWeb.Models
         public Nullable<System.DateTime> joinDate { get; set; }
     
         public virtual user user { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Match_players> Match_players { get; set; }
     }
 }
