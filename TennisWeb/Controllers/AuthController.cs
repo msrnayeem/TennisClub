@@ -42,5 +42,43 @@ namespace TennisWeb.Controllers
             TempData["ErrorMessage"] = "Invalid email or password";
             return RedirectToAction("Login");
         }
+
+
+        public ActionResult Logout()
+        {
+            Session["Role"] = null;
+            Session["Email"] = null;
+            return RedirectToAction("Login");
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+        public ActionResult Store(UserModel user) { 
+
+            if (ModelState.IsValid){
+
+                var newUser = new user
+                {
+                    email = user.Email,
+                    password = Crypto.HashPassword(user.Password),
+                    role = "user",
+                    status = "inactive"
+                };
+                if (UserService.AddUser(newUser))
+                {
+                    return RedirectToAction("Login");
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Something went wrong";
+                    return RedirectToAction("Register");
+                }
+             }
+
+            return View("Register", user);
+
+        }
     }
 }
