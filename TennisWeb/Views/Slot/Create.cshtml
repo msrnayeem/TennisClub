@@ -1,45 +1,61 @@
-﻿@{
+﻿@model TennisWeb.CF.Slot
+
+@{
     ViewBag.Title = "New Slot";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-4">
-            @if (!string.IsNullOrEmpty(ViewBag.Error))
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <h2>Create Slot</h2>
+            @using (Html.BeginForm("Store", "Slot", FormMethod.Post, new { @class = "needs-validation", novalidate = "true" }))
             {
-                <div class="error">@ViewBag.Error</div>
-            }
-            <form method="post" action="@Url.Action("Store", "Slot")" id="slot-form">
                 <div class="form-group">
-                    <label for="start-time">Slot Name</label>
-                    <input type="text" class="form-control" id="slot-name" name="name" required>
+                    @Html.LabelFor(model => model.Name)
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", required = "required" })
+                    <div class="invalid-feedback">Please enter a name.</div>
                 </div>
-                <div class="form-group">
-                    <label for="start-time">Start Time:</label>
-                    <input type="time" class="form-control" id="start-time"  name="start" required>
-                </div>
-                <div class="form-group">
-                    <label for="end-time">End Time:</label>
-                    <input type="time" class="form-control" id="end-time" name="end" required>
-                </div>
-                <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
-            </form>
-        </div>
-    </div>
-   
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('#slot-form').submit(function (event) {
-            var startTime = $('#start-time').val();
-            var endTime = $('#end-time').val();
-            if (endTime < startTime) {
-                alert('End time cannot be smaller than start time!');
-                event.preventDefault(); 
-            }
-        });
-    });
-</script>
 
-</div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Start)
+                    @Html.TextBoxFor(model => model.Start, new { @class = "form-control", type = "time", required = "required" })
+                    <div class="invalid-feedback">Please enter a start time.</div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.End)
+                    @Html.TextBoxFor(model => model.End, new { @class = "form-control", type = "time", required = "required" })
+                    <div class="invalid-feedback">Please enter an end time.</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            }
+            </div>
+        </div>
+    
+        </div>
+
+
+        <script>
+            // Example of form validation using Bootstrap's native validation classes
+            (function () {
+                'use strict';
+
+                var forms = document.querySelectorAll('.needs-validation');
+
+                Array.prototype.slice.call(forms)
+                    .forEach(function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (!form.checkValidity()) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+            })();
+        </script>
+
+

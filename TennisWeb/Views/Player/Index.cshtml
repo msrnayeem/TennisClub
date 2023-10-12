@@ -1,4 +1,4 @@
-﻿@model List<TennisWeb.Models.user>
+﻿@model List<TennisWeb.CF.User>
 
 @{
     ViewBag.Title = "Player List";
@@ -48,9 +48,9 @@
                                     foreach (var user in Model)
                                     {
                                         <tr>
-                                            <td>@user.email</td>
-                                            <td>@user.role </td>
-                                            <td>@user.status</td>
+                                            <td>@user.Email</td>
+                                            <td>@user.Role </td>
+                                            <td>@user.Status</td>
 
                                         </tr>
                                     }

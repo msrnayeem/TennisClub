@@ -15,7 +15,7 @@ namespace TennisWeb.Services
         {
             using (var db = new TennisContext())
             {
-                return db.Users.ToList();
+                return db.Users.Where( u => u.Role == "user").ToList();
             }
         }
 
@@ -57,57 +57,20 @@ namespace TennisWeb.Services
             }
         }
 
-        public static Exception AssignRole(string id, string role)
+        public static bool AssignRole(int id, string role)
         {
-            try
+            using (var db = new TennisContext())
             {
-                using (var db = new TennisContext())
+                var user = db.Users.FirstOrDefault(u => u.Id == id); // Here is the correction
+                if (user != null)
                 {
-                    using (var transaction = db.Database.BeginTransaction())
-                    {
-                        try
-                        {
-                            var user = db.Users.AsNoTracking().FirstOrDefault(u => u.Id == Convert.ToInt32(id));
-                            if (user != null)
-                            {
-                                user.Role = role;
-
-                                // Reattach the modified entity and mark the role property as modified
-                                db.Entry(user).State = EntityState.Modified;
-                                db.SaveChanges();
-
-                                transaction.Commit();
-                                return new Exception("updated");
-                            }
-                            else
-                            {
-                                // Return an exception indicating user not found
-                                return new Exception("User not found");
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            transaction.Rollback();
-                            // Log the exception for debugging
-                            // ...
-
-                            // Return the caught exception to indicate failure
-                            return ex;
-                        }
-                    }
+                    user.Role = role;
+                    return db.SaveChanges() > 0;
                 }
+                return false;
             }
-            catch (Exception ex)
-            {
-                // Handle any unexpected exceptions here
-                // Log the exception for debugging
-                // ...
-
-                // Return the caught exception to indicate failure
-                return ex;
-            }
-
         }
+
 
     }
 }

@@ -11,7 +11,7 @@ namespace TennisWeb.Controllers
     public class UserController : Controller
     {
         [HttpGet]
-        public JsonResult AssignRole(string id, string role)
+        public JsonResult AssignRole(int id, string role)
         {
             
                 // Your logic to assign the role based on the id and role parameters

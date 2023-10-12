@@ -9,16 +9,16 @@ namespace TennisWeb.Services
 {
     public class SlotService
     {
-        public static bool CreateSlot(string Name, DateTime Start, DateTime End)
+        public static bool CreateSlot(string name,TimeSpan start, TimeSpan end)
         {
 
             using (var db = new TennisContext())
             {
                 Slot newSlot = new Slot
                 {
-                    Name = Name,
-                    Start = Start,
-                    End = End,
+                    Name = name,
+                    Start = start,
+                    End = end,
                     Status = true,
                };
 

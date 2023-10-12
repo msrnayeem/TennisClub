@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TennisWeb.CF;
 using TennisWeb.Models;
 
 namespace TennisWeb.Controllers
@@ -27,10 +28,19 @@ namespace TennisWeb.Controllers
 
 
         [HttpPost]
-        public ActionResult Store(SlotModel slot)
+        public ActionResult Store(Slot slot)
         {
-            
-            return View(slot);
+            var result = Services.SlotService.CreateSlot(slot.Name, slot.Start, slot.End);
+            if(result)
+            {
+                TempData["SuccessMessage"] = "Slot created successfully!";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Error creating slot!";
+                return RedirectToAction("Create");
+            }
             
         }
 

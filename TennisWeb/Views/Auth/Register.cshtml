@@ -1,61 +1,56 @@
-﻿@model TennisWeb.Models.UserModel
+﻿@model TennisWeb.CF.User
 @{
     ViewBag.Title = "Register";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<head>
-    <link rel="stylesheet" href="~/Content/register.css" />
-</head>
-<section class="ftco-section">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-7 col-lg-5">
-                <div class="wrap">
-                   
-                    <div class="login-wrap p-4 p-md-5">
-                        <div class="d-flex">
-                            <div class="w-100">
-                                <h3 class="mb-4">Sign Up</h3>
-                            </div>
-                            <div class="w-100">
-                                <p class="social-media d-flex justify-content-end">
-                                    <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-facebook"></span></a>
-                                    <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-twitter"></span></a>
-                                </p>
-                            </div>
-                        </div>
-                        <form method="post" action="@Url.Action("Store", "Auth")" class="signin-form">
-                            <div class="form-group mt-3">
-                                <input type="email" class="form-control" required name="Email">
-                                <label class="form-control-placeholder" for="email">Email</label>
-                                <div class="invalid-feedback">
-                                    @Html.ValidationMessage("Email")
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <input id="password-field" type="password" name="Password" class="form-control" required>
-                                <label class="form-control-placeholder" for="password">Password</label>
-                                <div class="invalid-feedback">
-                                    @Html.ValidationMessage("Password")
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="form-control btn btn-primary rounded submit px-3">Sign Up</button>
-                            </div>
-                            <div class="form-group d-md-flex">
-       
-                                <div class="w-50 text-md-right">
-                                    <a href="#">Forgot Password</a>
-                                </div>
-                            </div>
-                        </form>
-                        <p class="text-center">already a member? <a data-toggle="tab" href="#signup">Sign in</a></p>
-                    </div>
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2>User Registration</h2>
+            @using (Html.BeginForm("Store", "Auth", FormMethod.Post, new { @class = "needs-validation", novalidate = "true" }))
+            {
+                <div class="form-group mb-4">
+                    @Html.LabelFor(model => model.Email)
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", required = "required" })
+                    <div class="invalid-feedback">Please enter a name.</div>
                 </div>
-            </div>
+
+                <div class="form-group mb-4">
+                    @Html.LabelFor(model => model.Password)
+                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", type = "text", required = "required" })
+                    <div class="invalid-feedback">Please enter a start time.</div>
+                </div>
+
+                
+
+                <button type="submit" class="btn btn-primary">Register</button>
+            }
         </div>
     </div>
-</section>
+</div>
+
+<script>
+    // Example of form validation using Bootstrap's native validation classes
+    (function () {
+        'use strict';
+
+        var forms = document.querySelectorAll('.needs-validation');
+
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+
+                    form.classList.add('was-validated');
+                }, false);
+            });
+    })();
+</script>
 
 
 

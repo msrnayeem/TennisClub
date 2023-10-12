@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using TennisWeb.CF;
 using TennisWeb.Models;
 using TennisWeb.Services;
 
@@ -55,7 +56,7 @@ namespace TennisWeb.Controllers
         {
             return View();
         }
-        public ActionResult Store(UserModel user) { 
+        public ActionResult Store(User user) { 
 
             if (ModelState.IsValid){
 
