@@ -136,8 +136,8 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CoachController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MatchController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
-    <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\SlotController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filter\AdminAttribute.cs" />
@@ -2288,10 +2288,12 @@
     <Content Include="Views\Player\Index.cshtml" />
     <Content Include="Views\Slot\Create.cshtml" />
     <Content Include="Views\Auth\Register.cshtml" />
+    <Content Include="Views\Match\Index.cshtml" />
+    <Content Include="Views\Match\Create.cshtml" />
+    <Content Include="Views\Match\Match.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Schedule\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

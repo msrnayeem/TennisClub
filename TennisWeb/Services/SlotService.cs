@@ -43,6 +43,14 @@ namespace TennisWeb.Services
                     return db.SaveChanges() > 0;
                 }
             }
-        }   
+        }
+        
+        public static List<Slot> GetSlots()
+        {
+            using (var db = new TennisContext())
+            {
+                return db.Slots.ToList();
+            }
+        }
     }
 }

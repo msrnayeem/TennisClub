@@ -10,11 +10,11 @@ namespace TennisWeb.Services
 {
     public class CoachService
     {
-        public static List<User> GetCoaches()
+        public static List<CoachInfo> GetCoaches()
         {
             using (var db = new TennisContext())
             {
-                return db.Users.Where(p => p.Role == "coach").Include(p => p.CoachInfoes).ToList();
+                return db.CoachInfoes.Include(p => p.User).ToList();
             }
         }
     }

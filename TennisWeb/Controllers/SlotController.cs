@@ -16,7 +16,7 @@ namespace TennisWeb.Controllers
         {
             TempData["msg"] = TempData["SuccessMessage"] as string;
 
-            var slots = Services.MatchService.GetSlots();
+            var slots = Services.SlotService.GetSlots();
             return View(slots);
         }
 
