@@ -16,5 +16,11 @@ namespace TennisWeb.CF
 
         public virtual ICollection<CoachInfo> CoachInfoes { get; set; }
         public virtual ICollection<PlayerInfo> PlayerInfoes { get; set; }
+
+        public User()
+        {
+            CoachInfoes = new List<CoachInfo>();
+            PlayerInfoes = new List<PlayerInfo>();
+        }
     }
 }

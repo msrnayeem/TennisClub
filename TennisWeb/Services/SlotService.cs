@@ -2,22 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using TennisWeb.CF;
 using TennisWeb.Models;
 
 namespace TennisWeb.Services
 {
     public class SlotService
     {
-        public static bool CreateSlot(string Name, string Start, string End)
+        public static bool CreateSlot(string Name, DateTime Start, DateTime End)
         {
 
-            using (var db = new tennisEntities())
+            using (var db = new TennisContext())
             {
                 Slot newSlot = new Slot
                 {
-                    name = Name,
-                    time = Start + " - " + End,
-                    status = 1,
+                    Name = Name,
+                    Start = Start,
+                    End = End,
+                    Status = true,
                };
 
                 db.Slots.Add(newSlot);
@@ -28,7 +30,7 @@ namespace TennisWeb.Services
 
         public static bool DeleteSlot(int id)
         {
-            using (var db = new tennisEntities())
+            using (var db = new TennisContext())
             {
                 var slot = db.Slots.Find(id);
                 if (slot == null)

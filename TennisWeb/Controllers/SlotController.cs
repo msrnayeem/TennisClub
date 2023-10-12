@@ -29,21 +29,7 @@ namespace TennisWeb.Controllers
         [HttpPost]
         public ActionResult Store(SlotModel slot)
         {
-            if (ModelState.IsValid)
-            {
-                var res = Services.SlotService.CreateSlot(slot.name, slot.start, slot.end);
-
-                if(res)
-                {
-                    TempData["SuccessMessage"] = "Slot created successfully!";
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    ViewData["ErrorMessage"] = "Error creating slot";
-                    return RedirectToAction("Create");
-                }   
-            }
+            
             return View(slot);
             
         }

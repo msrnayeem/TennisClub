@@ -4,51 +4,52 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TennisWeb.CF;
 using TennisWeb.Models;
 
 namespace TennisWeb.Services
 {
     public class UserService
     {
-        public static List<user> GetUsers()
+        public static List<User> GetUsers()
         {
-            using (var db = new tennisEntities())
+            using (var db = new TennisContext())
             {
-                return db.users.ToList();
+                return db.Users.ToList();
             }
         }
 
-        public static user GetUser(int id)
+        public static User GetUser(int id)
         {
-            using (var db = new tennisEntities())
+            using (var db = new TennisContext())
             {
-                return db.users.FirstOrDefault(u => u.id == id);
+                return db.Users.FirstOrDefault(u => u.Id == id);
             }
         }
 
-        public static bool AddUser(user user)
+        public static bool AddUser(User user)
         {
-            using (var db = new tennisEntities())
+            using (var db = new TennisContext())
             {
-                db.users.Add(user);
+                db.Users.Add(user);
                 return db.SaveChanges() > 0;
             }
         }
 
         public static bool ChnageStatus(int id)
         {
-            using (var db = new tennisEntities())
+            using (var db = new TennisContext())
             {
-                var user = db.users.FirstOrDefault(u => u.id == id);
+                var user = db.Users.FirstOrDefault(u => u.Id == id);
                 if (user != null)
                 {
-                   if(user.status == "active")
+                   if(user.Status == "active")
                     {
-                        user.status = "inactive";
+                        user.Status = "inactive";
                     }
                     else
                     {
-                        user.status = "active";
+                        user.Status = "active";
                     }   
                     return db.SaveChanges() > 0;
                 }
@@ -60,16 +61,16 @@ namespace TennisWeb.Services
         {
             try
             {
-                using (var db = new tennisEntities())
+                using (var db = new TennisContext())
                 {
                     using (var transaction = db.Database.BeginTransaction())
                     {
                         try
                         {
-                            var user = db.users.AsNoTracking().FirstOrDefault(u => u.id == Convert.ToInt32(id));
+                            var user = db.Users.AsNoTracking().FirstOrDefault(u => u.Id == Convert.ToInt32(id));
                             if (user != null)
                             {
-                                user.role = role;
+                                user.Role = role;
 
                                 // Reattach the modified entity and mark the role property as modified
                                 db.Entry(user).State = EntityState.Modified;

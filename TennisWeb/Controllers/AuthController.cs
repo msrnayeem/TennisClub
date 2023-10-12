@@ -59,12 +59,12 @@ namespace TennisWeb.Controllers
 
             if (ModelState.IsValid){
 
-                var newUser = new user
+                var newUser = new CF.User
                 {
-                    email = user.Email,
-                    password = Crypto.HashPassword(user.Password),
-                    role = "user",
-                    status = "inactive"
+                    Email = user.Email,
+                    Password = Crypto.HashPassword(user.Password),
+                    Role = "user",
+                    Status = "inactive"
                 };
                 if (UserService.AddUser(newUser))
                 {

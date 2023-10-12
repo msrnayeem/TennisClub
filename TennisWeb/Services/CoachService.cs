@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using TennisWeb.Models;
+using TennisWeb.CF;
+
 
 namespace TennisWeb.Services
 {
     public class CoachService
     {
-        public static List<user> GetCoaches()
+        public static List<User> GetCoaches()
         {
-            using (var db = new tennisEntities())
+            using (var db = new TennisContext())
             {
-                return db.users.Where(p => p.role == "coach").Include(p => p.coachInfoes).ToList();
+                return db.Users.Where(p => p.Role == "coach").Include(p => p.CoachInfoes).ToList();
             }
         }
     }

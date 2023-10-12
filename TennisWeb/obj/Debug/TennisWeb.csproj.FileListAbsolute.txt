@@ -63,3 +63,5 @@ D:\Learnings\TennisWeb\TennisWeb\obj\Debug\TennisWeb.csproj.CoreCompileInputs.ca
 D:\Learnings\TennisWeb\TennisWeb\obj\Debug\TennisWeb.csproj.CopyComplete
 D:\Learnings\TennisWeb\TennisWeb\obj\Debug\TennisWeb.dll
 D:\Learnings\TennisWeb\TennisWeb\obj\Debug\TennisWeb.pdb
+D:\Learnings\TennisWeb\TennisWeb\obj\Debug\TennisWeb.Migrations.init.resources
+D:\Learnings\TennisWeb\TennisWeb\obj\Debug\TennisWeb.csproj.GenerateResource.cache

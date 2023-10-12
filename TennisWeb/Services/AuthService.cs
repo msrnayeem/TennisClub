@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using TennisWeb.CF;
 using TennisWeb.Models;
 
 namespace TennisWeb.Services
@@ -10,25 +11,25 @@ namespace TennisWeb.Services
     {
         public static (string Role, string Status) AuthUser(string Email, string Password)
         {
-            using (var db = new tennisEntities())
+            using (var db = new TennisContext())
             {
-                var user = db.users.SingleOrDefault(u => u.email == Email && u.password == Password);
+                var user = db.Users.SingleOrDefault(u => u.Email == Email && u.Password == Password);
 
-                if (user != null && user.status == "blocked")
+                if (user != null && user.Status == "blocked")
                 {
                     return ("blocked", null);
                 }
 
-                return user != null && user.status != "block" ? (user.role, user.status) : (null, null);
+                return user != null && user.Status != "block" ? (user.Role, user.Status) : (null, null);
             }
         }
 
         public static string GetRole(string Email)
         {
-            using (var db = new tennisEntities())
+            using (var db = new TennisContext())
             {
-                var user = db.users.SingleOrDefault(u => u.email == Email);
-                return user?.role;
+                var user = db.Users.SingleOrDefault(u => u.Email == Email);
+                return user?.Role;
             }
         }
 

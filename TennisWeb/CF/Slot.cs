@@ -11,7 +11,8 @@ namespace TennisWeb.CF
         public string Name { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
+        public bool Status { get; set; }
 
-        public virtual ICollection<Match> Matches { get; set; }
+        public virtual ICollection<Match> Matches { get; set; } = new List<Match>();
     }
 }

@@ -126,6 +126,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="CF\CoachInfo.cs" />
+    <Compile Include="CF\TennisContext.cs" />
+    <Compile Include="CF\Match.cs" />
+    <Compile Include="CF\MatchPlayer.cs" />
+    <Compile Include="CF\Slot.cs" />
+    <Compile Include="CF\User.cs" />
+    <Compile Include="CF\PlayerInfo.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CoachController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -139,44 +146,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\coachInfo.cs">
-      <DependentUpon>TennisModel.tt</DependentUpon>
+    <Compile Include="Migrations\202310120752228_init.cs" />
+    <Compile Include="Migrations\202310120752228_init.designer.cs">
+      <DependentUpon>202310120752228_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\Match_players.cs">
-      <DependentUpon>TennisModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\playerInfo.cs">
-      <DependentUpon>TennisModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Slot.cs">
-      <DependentUpon>TennisModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\SlotModel.cs" />
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>TennisModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TennisModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TennisModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TennisModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TennisModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TennisModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TennisModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Upcoming.cs">
-      <DependentUpon>TennisModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\user.cs">
-      <DependentUpon>TennisModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthService.cs" />
@@ -2132,29 +2108,12 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\TennisModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TennisModel.edmx</DependentUpon>
-      <LastGenOutput>TennisModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\TennisModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TennisModel.edmx</DependentUpon>
-      <LastGenOutput>TennisModel.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.esm.js" />
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\TennisModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TennisModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\TennisModel.edmx.diagram">
-      <DependentUpon>TennisModel.edmx</DependentUpon>
-    </Content>
     <Content Include="Assets\css\adminlte.css.map" />
     <Content Include="Assets\css\adminlte.min.css.map" />
     <Content Include="Assets\css\alt\adminlte.components.css.map" />
@@ -2359,6 +2318,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202310120752228_init.resx">
+      <DependentUpon>202310120752228_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
