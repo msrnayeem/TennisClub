@@ -23,7 +23,7 @@ namespace TennisWeb.CF
         {
             // Define composite primary key for MatchPlayer entity
             modelBuilder.Entity<MatchPlayer>()
-                .HasKey(mp => new { mp.MatchId, mp.PlayerId });
+                .HasKey(pm => pm.Id);
 
             // Configure one-to-many relationship between User and CoachInfo
             modelBuilder.Entity<User>()

@@ -36,9 +36,18 @@
                         {
                             foreach (var player in Model.MatchPlayers)
                             {
-                                <p class="card-text"><strong>Player Id:</strong> @player.PlayerInfo.Name</p>
-                                <p class="card-text"><strong>Player Name:</strong> @player.PlayerInfo.PlayingPosition</p>
-                                <br />
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p class="card-text"><strong>Id:</strong> @player.PlayerInfo.Id</p>
+                                        <p class="card-text"><strong>Name:</strong> @player.PlayerInfo.Name</p>
+                                        <p class="card-text"><strong>Postion:</strong> @player.PlayerInfo.PlayingPosition</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a href="@Url.Action("Delete", "MatchPlayer", new { playerId = player.PlayerInfo.Id, mathcId =@Model.Id })">remove</a>
+                                    </div>
+                                </div>
+                                <hr />
+
                             }
                         }
                         else

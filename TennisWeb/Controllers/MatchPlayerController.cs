@@ -69,6 +69,24 @@ namespace TennisWeb.Controllers
 
             return RedirectToAction("Index");
             
-        }       
+        }  
+        
+
+        public ActionResult Delete(int playerId, int mathcId)
+        {
+            try
+            {
+                var res = Services.MatchPlayerService.DeleteMatchPlayer(playerId);
+                if (res)
+                    return RedirectToAction("Index", "MatchPlayer", new { id = mathcId });
+
+                return RedirectToAction("Index", "MatchPlayer", new { id = mathcId });
+            }
+            catch (Exception ex)
+            {
+                ViewBag.ErrorMessage = "An error occurred: " + ex.Message;
+                return View();
+            }
+        }
     }
 }

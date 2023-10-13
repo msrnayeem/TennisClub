@@ -159,6 +159,10 @@
     <Compile Include="Migrations\202310130630481_relationchanged.designer.cs">
       <DependentUpon>202310130630481_relationchanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202310131655561_matchplayernew.cs" />
+    <Compile Include="Migrations\202310131655561_matchplayernew.designer.cs">
+      <DependentUpon>202310131655561_matchplayernew.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\SlotModel.cs" />
@@ -2341,6 +2345,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202310130630481_relationchanged.resx">
       <DependentUpon>202310130630481_relationchanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202310131655561_matchplayernew.resx">
+      <DependentUpon>202310131655561_matchplayernew.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

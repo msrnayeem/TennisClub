@@ -23,6 +23,24 @@ namespace TennisWeb.Services
             
         }
 
+        public static bool DeleteMatchPlayer(int id)
+        {
+            using (var db = new TennisContext())
+            {
+                var matchPlayer = db.MatchPlayers.Find(id);
+
+                if (matchPlayer != null)
+                {
+                    db.MatchPlayers.Remove(matchPlayer);
+                    db.SaveChanges();
+                    return true; // Deletion successful
+                }
+
+                return false; // MatchPlayer with the given ID was not found
+            }
+        }
+
+
         public static List<MatchPlayer> GetMatchInfo(int id)
         {
             using (var db = new TennisContext())
