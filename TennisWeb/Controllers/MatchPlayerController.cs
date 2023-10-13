@@ -14,11 +14,18 @@ namespace TennisWeb.Controllers
         {
             try
             {
-                ViewBag.Players = Services.MatchPlayerService.GetPlayersInThisMatch(id);
-               
+                var players = Services.PlayerService.GetPlayers();
+                var playerSelectList = new SelectList(players, "Id", "Name");
 
-                var players = Services.MatchService.GetMatchInformation(id);
-                return View(players);
+                ViewBag.allPlayers = playerSelectList;
+
+
+
+                var selectedPlayers = Services.MatchPlayerService.GetSelected(id);
+                ViewBag.selectedPlayers = selectedPlayers;
+
+                var playersInfo = Services.MatchService.GetMatchInformation(id);
+                return View(playersInfo);
             }
             catch (Exception ex)
             {

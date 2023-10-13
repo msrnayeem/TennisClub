@@ -38,15 +38,15 @@ namespace TennisWeb.Services
             }
         }
 
-        public static List<int> GetPlayersInThisMatch(int id)
+
+
+        public static List<int> GetSelected(int id)
         {
             using (var db = new TennisContext())
             {
-                var result = db.MatchPlayers.Where(m => m.MatchId == id).Select(m => m.PlayerId).ToList();
-                return result;
+                return db.MatchPlayers.Where(x => x.MatchId == id).Select(x => x.PlayerId).ToList();
             }
         }
-        
-        
+
     }
 }

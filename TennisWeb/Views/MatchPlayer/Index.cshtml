@@ -10,20 +10,7 @@
         <div class="row justify-content-center">
             <div class="col-8">
                 <div class="card">
-                    <div>
-                        <h2>Players in this Match:</h2>
-                        @foreach (var player in Model.MatchPlayers)
-                        {
-                            if (!ViewBag.Players.Contains(player.PlayerInfo.Id))
-                            {
-                                <p class="card-text"><strong>Player Id:</strong> @player.PlayerInfo.Id</p>
-                                <p class="card-text"><strong>Player Name:</strong> @player.PlayerInfo.Name</p>
-                                <br />
-                            }
-                            <p>no</p>
-                        }
-
-                    </div>
+                    
                     <h5 class="card-header">Match Information</h5>
                     <div class="card-body">
                         <p class="card-text"><strong>Status:</strong> @(Model.Status ? "Upcoming" : "Completed")</p>
@@ -73,7 +60,15 @@
                             <div class="form-group">
                                 <label for="playerSelect">Select Players:</label>
                                 <select id="playerSelect" class="form-control" name="selectedPlayers[]">
-                                    
+                                    @foreach (SelectListItem playerOption in ViewBag.allPlayers)
+                                    {
+                                        // Check if the player's ID is NOT in ViewBag.selectedPlayers, and print the player information if it's not found
+                                        if (!ViewBag.selectedPlayers.Contains(int.Parse(playerOption.Value)))
+                                        {
+                                            <option value="@playerOption.Value">@playerOption.Text</option>
+                                        }
+
+                                    }
                                 </select>
                             </div>
                         </div>
