@@ -58,7 +58,7 @@
                                     foreach (var match in Model)
                                     {
                                         <tr>
-                                            <td><a href="@Url.Action("Match", "Match", new { id = match.Id })">Details</a></td>
+                                            <td><a href="@Url.Action("Index", "MatchPlayer", new { id = match.Id })">Details</a></td>
 
                                             <td>
                                                 @(match.Status ? "Upcoming" : "Completed")

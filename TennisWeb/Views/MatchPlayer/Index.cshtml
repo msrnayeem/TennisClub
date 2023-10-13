@@ -1,0 +1,95 @@
+﻿@model TennisWeb.CF.Match
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@if (Model != null)
+{
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="card">
+                    <div>
+                        <h2>Players in this Match:</h2>
+                        @foreach (var player in Model.MatchPlayers)
+                        {
+                            if (!ViewBag.Players.Contains(player.PlayerInfo.Id))
+                            {
+                                <p class="card-text"><strong>Player Id:</strong> @player.PlayerInfo.Id</p>
+                                <p class="card-text"><strong>Player Name:</strong> @player.PlayerInfo.Name</p>
+                                <br />
+                            }
+                            <p>no</p>
+                        }
+
+                    </div>
+                    <h5 class="card-header">Match Information</h5>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Status:</strong> @(Model.Status ? "Upcoming" : "Completed")</p>
+                        <p class="card-text"><strong>Match ID:</strong> @Model.Id</p>
+
+                        <p class="card-text"><strong>Slot Name:</strong> @Model.Slot.Name</p>
+                        <p class="card-text"><strong>Start Time:</strong> @Model.Slot.Start</p>
+                        <p class="card-text"><strong>End Time:</strong> @Model.Slot.End</p>
+                        <p class="card-text"><strong>Date:</strong> @Model.Time.ToString("dd MMMM, yyyy")</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5 class="card-header">Coach Information</h5>
+                    <div class="card-body">
+
+                        <p class="card-text"><strong>Coach Name:</strong> @Model.CoachInfo.Name</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <h5 class="card-header">Player Information</h5>
+                    <div class="card-body">
+                        @if (Model.MatchPlayers != null && Model.MatchPlayers.Any())
+                        {
+                            foreach (var player in Model.MatchPlayers)
+                            {
+                                <p class="card-text"><strong>Player Id:</strong> @player.PlayerInfo.Name</p>
+                                <p class="card-text"><strong>Player Name:</strong> @player.PlayerInfo.PlayingPosition</p>
+                                <br />
+                            }
+                        }
+                        else
+                        {
+                            <p class="card-text">No players found.</p>
+                        }
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-4">
+                <form id="playerForm" action="@Url.Action("Store", "MatchPlayer")" method="post">
+                    <div class="card">
+                        <h5 class="card-header">Add Player</h5>
+                        <div class="card-body">
+                            
+                            <input type="text" hidden class="form-control" id="matchId" name="matchId" readonly value="@Model.Id"> <!-- Replace '123' with the actual match ID -->
+                            
+                            <div class="form-group">
+                                <label for="playerSelect">Select Players:</label>
+                                <select id="playerSelect" class="form-control" name="selectedPlayers[]">
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Add Players</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+   </div>
+}
+else
+{
+    <div class="alert alert-danger">
+        <strong>Error:</strong> Match not found or an error occurred while retrieving match information.
+    </div>
+}

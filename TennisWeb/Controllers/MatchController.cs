@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TennisWeb.CF;
+using WebGrease.Css.Ast.Selectors;
 
 namespace TennisWeb.Controllers
 {
@@ -49,16 +50,8 @@ namespace TennisWeb.Controllers
 
         public ActionResult Match(int id)
         {
-            try
-            {
-                var players = Services.MatchService.GetMatchInfo(id);
-                return View(players);
-            }
-            catch (Exception ex)
-            {
-                ViewBag.ErrorMessage = "An error occurred: " + ex.Message;
-                return View();
-            }
+            var match = Services.MatchService.GetMatchInformation(id);
+            return View(match);
         }
 
     }

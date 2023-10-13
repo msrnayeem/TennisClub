@@ -5,6 +5,8 @@ using System.Text.RegularExpressions;
 using System.Web;
 using TennisWeb.CF;
 using TennisWeb.Models;
+using Match = TennisWeb.CF.Match;
+using System.Data.Entity;
 
 namespace TennisWeb.Services
 {
@@ -28,19 +30,19 @@ namespace TennisWeb.Services
             }
         }
 
-        public static List<MatchPlayer>  GetMatchInfo(int id)
+        public static Match GetMatchInformation(int id)
         {
-            using (var db = new TennisContext())
+            using(var db = new TennisContext())
             {
-                var result = db.MatchPlayers
-                    .Include("PlayerInfo")
-                    .Include("Match.Slot")
-                    .Include("Match.CoachInfo")
-                    .Where(x => x.MatchId == id)
-                    .ToList();
-                return result;
-
+                return db.Matches
+                    .Include(m => m.Slot)
+                 .Include(m => m.CoachInfo)
+                 .Include(m => m.MatchPlayers.Select(mp => mp.PlayerInfo)) // Include MatchPlayers and their related PlayerInfo entities
+                 .Where(m => m.Id == id)
+                 .SingleOrDefault();
             }
         }
+
+        
     }
 }

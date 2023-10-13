@@ -137,6 +137,7 @@
     <Compile Include="Controllers\CoachController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MatchController.cs" />
+    <Compile Include="Controllers\MatchPlayerController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\SlotController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\CoachService.cs" />
+    <Compile Include="Services\MatchPlayerService.cs" />
     <Compile Include="Services\MatchService.cs" />
     <Compile Include="Services\PlayerService.cs" />
     <Compile Include="Services\SlotService.cs" />
@@ -2295,6 +2297,7 @@
     <Content Include="Views\Match\Index.cshtml" />
     <Content Include="Views\Match\Create.cshtml" />
     <Content Include="Views\Match\Match.cshtml" />
+    <Content Include="Views\MatchPlayer\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

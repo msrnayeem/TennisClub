@@ -37,6 +37,7 @@
                         <table id="player_table" class="table table-bordered table-hover table-striped">
                             <thead>
                                 <tr>
+                                    <th>Id</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Position</th>
@@ -50,6 +51,7 @@
                                     foreach (var player in Model)
                                     {
                                         <tr>
+                                            <td>@player.Id</td>
                                             <td>@player.Name</td>
                                             <td> @player.User.Email </td>
                                             <td>@player.PlayingPosition</td>
