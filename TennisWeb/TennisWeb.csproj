@@ -154,6 +154,10 @@
     <Compile Include="Migrations\202310120939340_UpdateSlotModelTimeType.designer.cs">
       <DependentUpon>202310120939340_UpdateSlotModelTimeType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202310130630481_relationchanged.cs" />
+    <Compile Include="Migrations\202310130630481_relationchanged.designer.cs">
+      <DependentUpon>202310130630481_relationchanged.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\SlotModel.cs" />
@@ -2331,6 +2335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202310120939340_UpdateSlotModelTimeType.resx">
       <DependentUpon>202310120939340_UpdateSlotModelTimeType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202310130630481_relationchanged.resx">
+      <DependentUpon>202310130630481_relationchanged.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

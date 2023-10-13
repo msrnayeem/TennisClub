@@ -51,8 +51,8 @@ namespace TennisWeb.Controllers
         {
             try
             {
-                var match = Services.MatchService.GetMatch(id);
-                return View(match);
+                var players = Services.MatchService.GetMatchInfo(id);
+                return View(players);
             }
             catch (Exception ex)
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using TennisWeb.CF;
 using TennisWeb.Models;
@@ -9,7 +10,7 @@ namespace TennisWeb.Services
 {
     public class MatchService
     {
-        public static List<Match> GetMatches()
+        public static List<CF.Match> GetMatches()
         {
             using (var db = new TennisContext())
             {
@@ -17,7 +18,7 @@ namespace TennisWeb.Services
             }
         }
 
-        public static bool AddMatch(Match match)
+        public static bool AddMatch(CF.Match match)
         {
             using (var db = new TennisContext())
             {
@@ -27,12 +28,18 @@ namespace TennisWeb.Services
             }
         }
 
-        public static Match GetMatch(int id)
+        public static List<MatchPlayer>  GetMatchInfo(int id)
         {
             using (var db = new TennisContext())
             {
-                var result = db.Matches.Include("Slot").Include("CoachInfo").FirstOrDefault(m => m.Id == id);
-                return result ?? throw new Exception("Match not found!");
+                var result = db.MatchPlayers
+                    .Include("PlayerInfo")
+                    .Include("Match.Slot")
+                    .Include("Match.CoachInfo")
+                    .Where(x => x.MatchId == id)
+                    .ToList();
+                return result;
+
             }
         }
     }

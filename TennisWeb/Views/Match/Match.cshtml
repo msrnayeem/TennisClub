@@ -1,4 +1,4 @@
-﻿
+﻿@model List<TennisWeb.CF.MatchPlayer>
 @{
     ViewBag.Title = "Match";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -11,27 +11,33 @@
     </div>
 }
 
-@if (Model != null)
+@if (Model != null && Model.Any())
 {
-        <div class="container">
-            <div class="card">
-                <h5 class="card-header">Match Information</h5>
-                <div class="card-body">
-                    <p class="card-text"><strong>Status:</strong> @(Model.Status ? "Upcoming" : "Completed")</p>
-                    <p class="card-text"><strong>Match ID:</strong> @Model.Id</p>
-                    <p class="card-text"><strong>Coach Name:</strong> @Model.CoachInfo.Name</p>
-                    <p class="card-text"><strong>Slot Name:</strong> @Model.Slot.Name</p>
-                    <p class="card-text"><strong>Start Time:</strong> @Model.Slot.Start</p>
-                    <p class="card-text"><strong>End Time:</strong> @Model.Slot.End</p>
-                    <p class="card-text"><strong>Date:</strong> @Model.Time.ToString("dd MMMM, yyyy")</p>
-                </div>
-            </div>
+    foreach (var matchPlayer in Model)
+    {
+        <div>
+            <h2>Match Player Information</h2>
+            <p><strong>Player Name:</strong> @matchPlayer.PlayerInfo.Name</p>
+
+            <h3>Match Information</h3>
+            <p><strong>Match ID:</strong> @matchPlayer.Match.Id</p>
+            <p><strong>Match Date:</strong> @matchPlayer.Match.Time</p>
+
+            <h3>Slot Information</h3>
+            <p><strong>Slot Name:</strong> @matchPlayer.Match.Slot.Name</p>
+            <p><strong>Slot Start:</strong> @matchPlayer.Match.Slot.Start</p>
+            <p><strong>Slot End:</strong> @matchPlayer.Match.Slot.End</p>
+
+            <h3>Coach Information</h3>
+            <p><strong>Coach Name:</strong> @matchPlayer.Match.CoachInfo.Name</p>
         </div>
+        <hr />
+    }
+
 }
 else
 {
-    <div class="alert alert-danger">
-        <strong>Error:</strong> Match not found or an error occurred while retrieving match information.
-    </div>
+    <p>No match information available for the specified match ID.</p>
 }
+
 

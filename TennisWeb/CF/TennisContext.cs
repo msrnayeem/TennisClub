@@ -58,8 +58,20 @@ namespace TennisWeb.CF
                 .WithMany(s => s.Matches)
                 .HasForeignKey(m => m.SlotId);
 
+            // Additional configuration for MatchPlayer entity
+            modelBuilder.Entity<MatchPlayer>()
+                .HasRequired(mp => mp.Match)
+                .WithMany(m => m.MatchPlayers)
+                .HasForeignKey(mp => mp.MatchId);
+
+            modelBuilder.Entity<MatchPlayer>()
+                .HasRequired(mp => mp.PlayerInfo)
+                .WithMany() // Assuming there's no navigation property from PlayerInfo to MatchPlayer
+                .HasForeignKey(mp => mp.PlayerId);
+
             base.OnModelCreating(modelBuilder);
         }
+
 
     }
 }
