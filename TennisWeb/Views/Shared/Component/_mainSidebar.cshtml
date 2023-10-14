@@ -24,19 +24,6 @@
                         <p>Users</p>
                     </a>
                 </li>
-
-                <li class="nav-item">
-                    <a href="@Url.Action("Index", "Coach")" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>Coaches</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="@Url.Action("Index", "Player")" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
-                        <p>Players</p>
-                    </a>
-                </li>
                 <li class="nav-item">
                     <a href="@Url.Action("Index", "Slot")" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
@@ -48,6 +35,56 @@
                         <i class="nav-icon fas fa-users"></i>
                         <p>Matches</p>
                     </a>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Coach
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>Not Updated</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Coach")" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>Coaches</p>
+                            </a>
+                        </li>
+                       
+                       
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Player
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>Not Updated</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "Player")" class="nav-link">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>Players</p>
+                            </a>
+                        </li>
+                        
+                        
+                    </ul>
                 </li>
             </ul>
         </nav>

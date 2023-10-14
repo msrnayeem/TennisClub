@@ -12714,6 +12714,7 @@ body:not(.layout-fixed) .main-sidebar .sidebar {
   display: none;
   list-style: none;
   padding: 0;
+  padding-left:10px;
 }
 
 .nav-sidebar .nav-treeview > .nav-item > .nav-link > .nav-icon {

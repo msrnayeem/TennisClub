@@ -15,10 +15,7 @@ namespace TennisWeb.Controllers
         {
             try
             {
-                if (TempData.ContainsKey("ErrorMessage"))
-                {
-                    ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
-                }
+                TempData["msg"] = TempData["SuccessMessage"] as string;
 
                 var players = Services.PlayerService.GetPlayers();
                 var playerSelectList = new SelectList(players, "Id", "Name");
@@ -72,11 +69,16 @@ namespace TennisWeb.Controllers
             }
 
             var res = Services.MatchPlayerService.AddMatchPlayer(matchPlayers);
-            if(res)
-                return RedirectToAction("Index","MatchPlayer", new { id = matchId });
+            if (res)
+            {
+                TempData["SuccessMessage"] = "Match created successfully!";
+                return RedirectToAction("Index", "MatchPlayer", new { id = matchId });
+            }
 
-            return RedirectToAction("Index");
-            
+            TempData["SuccessMessage"] = "Failed to Create Match!";
+            return RedirectToAction("Index", "MatchPlayer", new { id = matchId });
+
+
         }  
         
 
@@ -85,12 +87,12 @@ namespace TennisWeb.Controllers
             try
             {
                 var res = Services.MatchPlayerService.DeleteMatchPlayer(matchId,playerId);
-                TempData["ErrorMessage"] = res;
+                TempData["SuccessMessage"] = res;
                 return RedirectToAction("Index", "MatchPlayer", new { id = matchId });
             }
             catch (Exception ex)
             {
-                TempData["ErrorMessage"] = "An error occurred: " + ex.Message;
+                TempData["SuccessMessage"] = "An error occurred: " + ex.Message;
                 return RedirectToAction("Index", "MatchPlayer", new { id = matchId });
             }
         }
