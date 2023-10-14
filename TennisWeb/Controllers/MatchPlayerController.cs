@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using TennisWeb.CF;
@@ -14,6 +15,11 @@ namespace TennisWeb.Controllers
         {
             try
             {
+                if (TempData.ContainsKey("ErrorMessage"))
+                {
+                    ViewBag.ErrorMessage = TempData["ErrorMessage"].ToString();
+                }
+
                 var players = Services.PlayerService.GetPlayers();
                 var playerSelectList = new SelectList(players, "Id", "Name");
 
@@ -25,6 +31,8 @@ namespace TennisWeb.Controllers
                 ViewBag.selectedPlayers = selectedPlayers;
 
                 var playersInfo = Services.MatchService.GetMatchInformation(id);
+
+                
                 return View(playersInfo);
             }
             catch (Exception ex)
@@ -72,20 +80,18 @@ namespace TennisWeb.Controllers
         }  
         
 
-        public ActionResult Delete(int playerId, int mathcId)
+        public ActionResult Delete(int matchId, int playerId)
         {
             try
             {
-                var res = Services.MatchPlayerService.DeleteMatchPlayer(playerId);
-                if (res)
-                    return RedirectToAction("Index", "MatchPlayer", new { id = mathcId });
-
-                return RedirectToAction("Index", "MatchPlayer", new { id = mathcId });
+                var res = Services.MatchPlayerService.DeleteMatchPlayer(matchId,playerId);
+                TempData["ErrorMessage"] = res;
+                return RedirectToAction("Index", "MatchPlayer", new { id = matchId });
             }
             catch (Exception ex)
             {
-                ViewBag.ErrorMessage = "An error occurred: " + ex.Message;
-                return View();
+                TempData["ErrorMessage"] = "An error occurred: " + ex.Message;
+                return RedirectToAction("Index", "MatchPlayer", new { id = matchId });
             }
         }
     }

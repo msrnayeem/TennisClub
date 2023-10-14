@@ -9,8 +9,14 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-8">
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.ErrorMessage
+                    </div>
+                }
                 <div class="card">
-                    
+
                     <h5 class="card-header">Match Information</h5>
                     <div class="card-body">
                         <p class="card-text"><strong>Status:</strong> @(Model.Status ? "Upcoming" : "Completed")</p>
@@ -43,11 +49,10 @@
                                         <p class="card-text"><strong>Postion:</strong> @player.PlayerInfo.PlayingPosition</p>
                                     </div>
                                     <div class="col-md-4">
-                                        <a href="@Url.Action("Delete", "MatchPlayer", new { playerId = player.PlayerInfo.Id, mathcId =@Model.Id })">remove</a>
+                                        <a href="@Url.Action("Delete", "MatchPlayer", new { matchId =@Model.Id, playerId = player.PlayerInfo.Id })">remove</a>
                                     </div>
                                 </div>
                                 <hr />
-
                             }
                         }
                         else
