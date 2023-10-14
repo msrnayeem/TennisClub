@@ -17,5 +17,7 @@ namespace TennisWeb.Services
                 return db.PlayerInfoes.Include(p => p.User).ToList();
             }
         }
+
+        
     }
 }

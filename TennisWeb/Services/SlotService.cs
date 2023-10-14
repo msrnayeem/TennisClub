@@ -53,11 +53,27 @@ namespace TennisWeb.Services
             }
         }
 
-        public static List<Slot> GetAllSlots()
+        public static List<Object> GetFreeSlots(DateTime date)
         {
             using (var db = new TennisContext())
             {
-                return db.Slots.ToList();
+                //  var booked = Services.MatchService.GetBookedSlots(DateTime.Now);
+                var bookedSlotIds =  Services.MatchService.GetBookedSlots(date);
+                var allSlots = db.Slots.ToList();
+
+                var freeSlots = allSlots
+                .Where(slot => !bookedSlotIds.Contains(slot.Id))
+                .Select(slot => new
+                {
+                    slot.Id,
+                    slot.Name,
+                    slot.Start,
+                    slot.End,
+                    slot.Status
+                })
+            .   ToList<object>();
+
+                return freeSlots;
             }
         }
     }

@@ -65,30 +65,33 @@ namespace TennisWeb.Controllers
         {
             try
             {
-                var allSlots = Services.SlotService.GetAllSlots();
+                var freeSlots = Services.SlotService.GetFreeSlots(date);
 
-                // Static list of booked slot IDs
-                var bookedSlotIds = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8 };
-
-                var freeSlots = allSlots
-            .Where(slot => !bookedSlotIds.Contains(slot.Id))
-            .Select(slot => new
-            {
-                Id = slot.Id,
-                Name = slot.Name,
-                Start = slot.Start,
-                End = slot.End,
-                Status = slot.Status
-            })
-            .ToList();
-
-                return Json(freeSlots, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, slots = freeSlots }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 // Log the exception details for debugging
                 Console.WriteLine(ex.Message);
-                return Json(new { error = "An error occurred while fetching slots." });
+                return Json(new { success = false, error = "An error occurred while fetching slots." }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        [HttpGet]
+        public JsonResult GetFreeCoaches(DateTime date, int id)
+        {
+            try
+            {
+                var freeCoaches = Services.MatchService.GetFreeCoaches(date, id);
+
+                return Json(new { success = true, coaches = freeCoaches }, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception ex)
+            {
+                // Log the exception details for debugging
+                Console.WriteLine(ex.Message);
+                return Json(new { success = false, error = "An error occurred while fetching coaches." }, JsonRequestBehavior.AllowGet);
             }
         }
 
