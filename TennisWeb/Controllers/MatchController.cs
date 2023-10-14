@@ -22,7 +22,7 @@ namespace TennisWeb.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.Error = ViewData["ErrorMessage"] as string;
+            TempData["msg"] = TempData["ErrorMessage"] as string;
 
             ViewBag.SlotList = Services.SlotService.GetSlots();
             ViewBag.CoachList = Services.CoachService.GetCoaches();
@@ -32,26 +32,64 @@ namespace TennisWeb.Controllers
 
         public ActionResult Store(Match match)
         {
-            match.Status = true;
-            var result = Services.MatchService.AddMatch(match);
+            match.Status = false;
+            string resultMessage = Services.MatchService.AddMatch(match);
 
-            if (result)
+            // Check if the resultMessage starts with "Error:"
+            if (resultMessage.StartsWith("Error:"))
             {
-                TempData["SuccessMessage"] = "Match created successfully!";
-                return RedirectToAction("Index");
+                // If there was an error, store the error message in TempData
+                TempData["ErrorMessage"] = resultMessage;
             }
             else
             {
-                TempData["ErrorMessage"] = "Error creating Match!";
-                return View("Create");
+                // If there was no error, you can store a success message if needed
+                TempData["SuccessMessage"] = resultMessage;
             }
-            
+            return RedirectToAction("Create");
+
         }
 
         public ActionResult Match(int id)
         {
             var match = Services.MatchService.GetMatchInformation(id);
             return View(match);
+        }
+
+
+
+
+        //apis for adding slot
+        [HttpGet]
+        public JsonResult GetBookedSlots(DateTime date)
+        {
+            try
+            {
+                var allSlots = Services.SlotService.GetAllSlots();
+
+                // Static list of booked slot IDs
+                var bookedSlotIds = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8 };
+
+                var freeSlots = allSlots
+            .Where(slot => !bookedSlotIds.Contains(slot.Id))
+            .Select(slot => new
+            {
+                Id = slot.Id,
+                Name = slot.Name,
+                Start = slot.Start,
+                End = slot.End,
+                Status = slot.Status
+            })
+            .ToList();
+
+                return Json(freeSlots, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception details for debugging
+                Console.WriteLine(ex.Message);
+                return Json(new { error = "An error occurred while fetching slots." });
+            }
         }
 
     }

@@ -65,6 +65,7 @@ namespace TennisWeb.Services
                 if (user != null)
                 {
                     user.Role = role;
+                    user.Status = "active";
                     return db.SaveChanges() > 0;
                 }
                 return false;

@@ -52,5 +52,13 @@ namespace TennisWeb.Services
                 return db.Slots.ToList();
             }
         }
+
+        public static List<Slot> GetAllSlots()
+        {
+            using (var db = new TennisContext())
+            {
+                return db.Slots.ToList();
+            }
+        }
     }
 }
