@@ -1,30 +1,20 @@
 ﻿@model TennisWeb.CF.Match
 @{
-	ViewBag.Title = "Index";
-	Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-@If (Model!= null)
+@if (Model != null)
 {
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-8">
-				
-				@If (!string.IsNullOrEmpty(TempData["msg"] As String))
-				{
-				<div class="col-md-4 col-sm-12">
-					<div class="alert alert-success text-center">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						@TempData["msg"]
-					</div>
-				</div>
-				 }
-				<div class="card">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                
+                <div class="card">
 
-					<h5 class="card-header">Match Information</h5>
+                    <h5 class="card-header">Match Information</h5>
                     <div class="card-body">
-                        <p class="card-text"><strong>Status:</strong> @(Model.Status ? "Upcoming"  "Completed")</p>
-
+                        <p class="card-text"><strong>Status:</strong> @(Model.Status ? "Upcoming" : "Completed")</p>
                         <p class="card-text"><strong>Match ID:</strong> @Model.Id</p>
 
                         <p class="card-text"><strong>Slot Name:</strong> @Model.Slot.Name</p>
@@ -32,78 +22,97 @@
                         <p class="card-text"><strong>End Time:</strong> @Model.Slot.End</p>
                         <p class="card-text"><strong>Date:</strong> @Model.Time.ToString("dd MMMM, yyyy")</p>
                     </div>
-				</div>
-				<div class="card">
-					<h5 class="card-header">Coach Information</h5>
-					<div class="card-body">
+                </div>
+                <div class="card">
+                    <h5 class="card-header">Coach Information</h5>
+                    <div class="card-body">
 
-						<p class="card-text"><strong>Coach Name:</strong> @Model.CoachInfo.Name</p>
-					</div>
-				</div>
-				<div class="card">
-					<h5 class="card-header">Player Information</h5>
-					<div class="card-body">
-						@If (Model.MatchPlayers! = null && Model.MatchPlayers.Any())
-												{
-													foreach (var player in Model.MatchPlayers)
-													{
-						<div class="row">
-							<div class="col-md-8">
-								<p class="card-text"><strong>Id:</strong> @player.PlayerInfo.Id</p>
-								<p class="card-text"><strong>Name:</strong> @player.PlayerInfo.Name</p>
-								<p class="card-text"><strong>Postion:</strong> @player.PlayerInfo.PlayingPosition</p>
-							</div>
-                            <div class="col-md-4">
-                                <a href="@Url.Action("Delete", "MatchPlayer", New { matchId = Model.Id, playerId = player.PlayerInfo.Id })">remove</a>
+                        <p class="card-text"><strong>Coach Name:</strong> @Model.CoachInfo.Name</p>
+                    </div>
+                </div>
+                <div class="card">
+                    @if (!string.IsNullOrEmpty(TempData["msg"] as string))
+                    {
 
+                        <div class="alert alert-success text-center">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            @TempData["msg"]
+                        </div>
+
+                    }
+                    <h5 class="card-header">Player Information</h5>
+                    <div class="card-body">
+                        @if (Model.MatchPlayers != null && Model.MatchPlayers.Any())
+                        {
+                            foreach (var player in Model.MatchPlayers)
+                            {
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <p class="card-text"><strong>Name:</strong> @player.PlayerInfo.Name</p>
+                                        <p class="card-text"><strong>Postion:</strong> @player.PlayerInfo.PlayingPosition</p>
+                                    </div>
+                                    @if (Model.Status) { 
+                                        <div class="col-md-4">
+                                            <a href="@Url.Action("Delete", "MatchPlayer", new { matchId =@Model.Id, playerId = player.PlayerInfo.Id })">remove</a>
+                                        </div>
+                                     }
+                                </div>
+                                <hr />
+                            }
+                        }
+                        else
+                        {
+                            <p class="card-text">No players found.</p>
+                        }
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-4">
+                <form id="playerForm" action="@Url.Action("Store", "MatchPlayer")" method="post">
+                    <div class="card">
+                        @if (Model.Status)
+                        {
+                            <h5 class="card-header">Add Player</h5>
+                            <div class="card-body">
+                                <input type="text" hidden class="form-control" id="matchId" name="matchId" readonly value="@Model.Id"> <!-- Replace '123' with the actual match ID -->
+
+                                <div class="form-group">
+                                    <label for="playerSelect">Select Players:</label>
+                                    <select id="playerSelect" class="form-control" name="selectedPlayers[]">
+                                        @foreach (SelectListItem playerOption in ViewBag.allPlayers)
+                                        {
+                                            // Check if the player's ID is NOT in ViewBag.selectedPlayers, and print the player information if it's not found
+                                            if (!ViewBag.selectedPlayers.Contains(int.Parse(playerOption.Value)))
+                                            {
+                                                <option value="@playerOption.Value">@playerOption.Text</option>
+                                            }
+
+                                        }
+                                    </select>
+                                </div>
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Add Players</button>
+                                </div>
                             </div>
-						</div>
-						<hr />
-													}
-												}
-												Else
-												{
-						<p class="card-text">No players found.</p>
-												}
-					</div>
-
-				</div>
-			</div>
-			<div class="col-4">
-				<form id="playerForm" action="@Url.Action("Store", "MatchPlayer")" method="post">
-					<div class="card">
-						<h5 class="card-header">Add Player</h5>
-						<div class="card-body">
-							
-							<input type="text" hidden class="form-control" id="matchId" name="matchId" readonly value="@Model.Id"> <!-- Replace '123' with the actual match ID -->
-							
-							<div class="form-group">
-								<label for="playerSelect">Select Players:</label>
-                                <select id="playerSelect" class="form-control" name="selectedPlayers[]">
-                                    @foreach (SelectListItem playerOption in ViewBag.allPlayers)
-                                                                                                                                                {
-                                                                                                                                                    // Check if the player's ID is NOT in ViewBag.selectedPlayers, and print the player information if it's not found
-                                    @If (!ViewBag.selectedPlayers.Contains(int.Parse(playerOption.Value)))
-{
-                                    <option value="@playerOption.Value">@playerOption.Text</option>
-}
-
-                                </select>
-							</div>
-						</div>
-						<div class="card-footer">
-							<button type="submit" class="btn btn-primary">Add Players</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
+                        }
+                        else
+                        {
+                            <h5 class="card-header">Match Completed</h5>
+                            <div class="card-body">
+                                <p class="card-text">Match has been completed. No more players can be added.</p>
+                            </div>
+                        }
+                        </div>
+                </form>
+            </div>
+        </div>
 
    </div>
 }
-Else
+else
 {
-	<div class="alert alert-danger">
-		<strong>Error:</strong> Match not found or an error occurred while retrieving match information.
-	</div>
+    <div class="alert alert-danger">
+        <strong>Error:</strong> Match not found or an error occurred while retrieving match information.
+    </div>
 }

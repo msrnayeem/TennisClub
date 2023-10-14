@@ -7,6 +7,7 @@ using TennisWeb.CF;
 using TennisWeb.Models;
 using Match = TennisWeb.CF.Match;
 using System.Data.Entity;
+using System.IO;
 
 namespace TennisWeb.Services
 {
@@ -112,6 +113,58 @@ namespace TennisWeb.Services
             return FreeCoaches;
         }
 
-        
+        public static string DeleteMatch(int id)
+        {
+            using (var db = new TennisContext())
+            {
+                try
+                {
+                    // Check if a match with the same slot and time already exists
+                    var matchExists = db.Matches.FirstOrDefault(m => m.Id == id);
+
+                    if (matchExists != null)
+                    {
+                        // If no match with the same slot and time exists, add the new match
+                        db.Matches.Remove(matchExists);
+                        db.SaveChanges();
+
+                        return "Match deleted successfully!";
+                    }
+
+                    return "No match found";
+                }
+                catch (Exception ex)
+                {
+                    // If there is a database error, return the specific error message
+                    return $"Error: {ex.Message}";
+                }
+            }
+        }
+        public static string UpdateMatch(int id)
+        {
+            using (var db = new TennisContext())
+            {
+                try
+                {
+                    // Check if a match with the same slot and time already exists
+                    var matchExists = db.Matches.FirstOrDefault(m => m.Id == id);
+
+                    if (matchExists != null)
+                    {
+                        matchExists.Status = !matchExists.Status;
+                        db.SaveChanges();
+
+                        return "Match Status Updated";
+                    }
+
+                    return "No match found";
+                }
+                catch (Exception ex)
+                {
+                    // If there is a database error, return the specific error message
+                    return $"Error: {ex.Message}";
+                }
+            }
+        }
     }
 }

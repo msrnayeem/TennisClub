@@ -53,18 +53,19 @@ namespace TennisWeb.Controllers
             }
             else
             {
-                var res = Services.SlotService.DeleteSlot(id);
+                var resultMessage = Services.SlotService.DeleteSlot(id);
 
-                if(res)
+                if (resultMessage.StartsWith("Error:"))
                 {
-                    TempData["SuccessMessage"] = "Slot deleted successfully!";
-                    return RedirectToAction("Index");
+                    // If there was an error, store the error message in TempData
+                    TempData["SuccessMessage"] = resultMessage;
                 }
-                else
-                {
-                    TempData["SuccessMessage"] = "Error deleting slot!";
-                    return RedirectToAction("Index");
-                }
+
+                
+                TempData["SuccessMessage"] = "Slot deleted successfully!";
+                return RedirectToAction("Index");
+                
+                
             }
              
         }

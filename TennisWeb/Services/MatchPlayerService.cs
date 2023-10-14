@@ -35,7 +35,7 @@ namespace TennisWeb.Services
                     {
                         db.MatchPlayers.Remove(matchPlayer);
                         db.SaveChanges();
-                        return "Success"; // Deletion successful
+                        return "Player Removed from this match"; // Deletion successful
                     }
 
                     return "Error: MatchPlayer with the given ID was not found";

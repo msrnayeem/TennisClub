@@ -22,7 +22,7 @@ namespace TennisWeb.Controllers
 
         public ActionResult Create()
         {
-            TempData["msg"] = TempData["ErrorMessage"] as string;
+            TempData["msg"] = TempData["SuccessMessage"] as string;
 
             ViewBag.SlotList = Services.SlotService.GetSlots();
             ViewBag.CoachList = Services.CoachService.GetCoaches();
@@ -39,7 +39,7 @@ namespace TennisWeb.Controllers
             if (resultMessage.StartsWith("Error:"))
             {
                 // If there was an error, store the error message in TempData
-                TempData["ErrorMessage"] = resultMessage;
+                TempData["SuccessMessage"] = resultMessage;
             }
             else
             {
@@ -56,7 +56,35 @@ namespace TennisWeb.Controllers
             return View(match);
         }
 
+        public ActionResult DeleteMatch(int id)
+        {
+            var resultMessage = Services.MatchService.DeleteMatch(id);
+           
+            if (resultMessage.StartsWith("Error:"))
+            {
+                TempData["SuccessMessage"] = resultMessage;
+            }
+            else
+            {
+                TempData["SuccessMessage"] = resultMessage;
+            }
+            return RedirectToAction("Index");
+        }
 
+        public ActionResult UpdateMatch(int id)
+        {
+            var resultMessage = Services.MatchService.UpdateMatch(id);
+
+            if (resultMessage.StartsWith("Error:"))
+            {
+                TempData["SuccessMessage"] = resultMessage;
+            }
+            else
+            {
+                TempData["SuccessMessage"] = resultMessage;
+            }
+            return RedirectToAction("Index");
+        }
 
 
         //apis for adding slot

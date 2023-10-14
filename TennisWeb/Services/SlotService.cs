@@ -28,23 +28,32 @@ namespace TennisWeb.Services
             }
         }
 
-        public static bool DeleteSlot(int id)
+        public static string DeleteSlot(int id)
         {
             using (var db = new TennisContext())
             {
-                var slot = db.Slots.Find(id);
-                if (slot == null)
+                try
                 {
-                    return false;
+                    var slot = db.Slots.Find(id);
+                    if (slot == null)
+                    {
+                        return "Error: Slot not found";
+                    }
+                    else
+                    {
+                        db.Slots.Remove(slot);
+                        db.SaveChanges();
+                        return "Error: Slot deleted successfully";
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    db.Slots.Remove(slot);
-                    return db.SaveChanges() > 0;
+                    return $"Error: {ex.Message}"; // Handle and return the specific exception message
                 }
             }
         }
-        
+
+
         public static List<Slot> GetSlots()
         {
             using (var db = new TennisContext())
