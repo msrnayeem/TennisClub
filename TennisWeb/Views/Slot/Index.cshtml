@@ -7,6 +7,7 @@
 <head>
     <!-- DataTables -->
     <link rel="stylesheet" href="~/Assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css" />
+<link rel="stylesheet" href="~/Assets/plugins/datatables-responsive/css/responsive.bootstrap4.css" />
 </head>
 <div class="container-fluid">
     <!-- Content Header (Page header) -->
@@ -64,13 +65,11 @@
                                                 <td>@slot.Name </td>
                                                 <td>@slot.Start</td>
                                                 <td>@slot.End</td>
-                                                <td>@slot.Status</td>
+                                                <td>  @(slot.Status ? "Active" : "Block")</td>
                                                 <td class="text-center">
-                                                    <a id="edit" data-match-id="" href="#">
-                                                        <svg class="filament-link-icon w-6 h-6 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
-                                                        </svg>
-                                                    </a>
+                                                    <a  data-slot-id="@slot.Id" href="#" class="edit-status">
+                                                        Change Status
+                                                    </a> ||
                                                     <a data-slot-id="@slot.Id" href="#" class="text-danger  w-6 h-6 mr-1 remove">
                                                         Delete
                                                     </a>
@@ -101,10 +100,22 @@
 
 <script src="~/Assets/plugins/datatables/jquery.dataTables.js"></script>
 <script src="~/Assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<script src="~/Assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
     $(function () {
-        $('#slot_table').DataTable();
+        $('#slot_table').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "columnDefs": [
+                { "orderable": true }
+            ]
+        });
     });
 
         $('.remove').on('click', function(event) {
@@ -120,14 +131,74 @@
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
-            
+
 
             if (result.isConfirmed) {
-                
+
                 // Use proper string concatenation to replace updateId in the URL
                 var url = '@Url.Action("Delete", "Slot", new { id = "PLACEHOLDER" })'.replace('PLACEHOLDER', slotId);
                 window.location.href = url;
             }
         });
-    });
+
+
+
+
+
+
+        });
+
+    $('.edit-status').on('click', function(event) {
+    event.preventDefault();
+
+
+        Swal.fire({
+            title: 'Change Status',
+            text: 'Are you sure you want to change the status?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var slotId = parseInt($(this).data("slot-id"));
+                 var url = '@Url.Action("ChangeStatus", "Slot", new { id = "PLACEHOLDER" })'.replace('PLACEHOLDER', slotId);
+                $.ajax({
+                    url: url, // Replace with the actual endpoint URL
+                    type: 'get',
+                    data: {
+                        id: slotId
+                    },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: 'Success!',
+                                text: response.message,
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                                allowOutsideClick: false
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                        Swal.fire({
+                            title: 'Error!',
+                            text: error.message,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+            }
+        });
+
+
+});
+
 </script>

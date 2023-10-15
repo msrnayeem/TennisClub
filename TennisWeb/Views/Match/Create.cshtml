@@ -91,12 +91,17 @@
                 success: function (data) {
                     if (data.success) {
                         var selectElement = $("#SlotId");
-                        selectElement.empty().append('<option value="">-- Select Slot --</option>');
+                        selectElement.empty();
 
-                        // Assuming data.slots is the array received from your API call
-                        $.each(data.slots, function (index, slot) {
-                            selectElement.append($('<option></option>').attr('value', slot.Id).text(slot.Name));
-                        });
+                        if (data.slots.length === 0) {
+                            selectElement.append('<option value="">No slots available</option>');
+                        } else {
+                            selectElement.append('<option value="">-- Select Slot --</option>');
+
+                            $.each(data.slots, function (index, slot) {
+                                selectElement.append($('<option></option>').attr('value', slot.Id).text(slot.Name));
+                            });
+                        }
                     }
                     else {
                         console.log(data);
@@ -131,13 +136,20 @@
                 success: function (data) {
                     console.log(data);
                     if (data.success) {
-                        var selectElement = $("#CoachId");
-                        selectElement.empty().append('<option value="">-- Select Slot --</option>');
 
-                        // Assuming data.slots is the array received from your API call
-                        $.each(data.coaches, function (index, slot) {
-                            selectElement.append($('<option></option>').attr('value', slot.Id).text(slot.Name));
-                        });
+                        var selectElement = $("#CoachId");
+                        selectElement.empty();
+
+                        if (data.coaches.length === 0) {
+                            selectElement.append('<option value="">No coaches available</option>');
+                        } else {
+                            selectElement.append('<option value="">-- Select Coach --</option>');
+
+                            $.each(data.coaches, function (index, coach) {
+                                selectElement.append($('<option></option>').attr('value', coach.Id).text(coach.Name));
+                            });
+                        }
+
                     }
                     else {
                         console.log(data);

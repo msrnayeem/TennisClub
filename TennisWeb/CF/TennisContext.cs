@@ -25,6 +25,10 @@ namespace TennisWeb.CF
             modelBuilder.Entity<MatchPlayer>()
                 .HasKey(pm => pm.Id);
 
+            //primary key for slot
+            modelBuilder.Entity<Slot>()
+                .HasKey(s => s.Id);
+
             // Configure one-to-many relationship between User and CoachInfo
             modelBuilder.Entity<User>()
                 .HasMany(u => u.CoachInfoes)

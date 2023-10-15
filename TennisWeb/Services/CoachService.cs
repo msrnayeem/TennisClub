@@ -14,7 +14,10 @@ namespace TennisWeb.Services
         {
             using (var db = new TennisContext())
             {
-                return db.CoachInfoes.Include(p => p.User).ToList();
+                return db.CoachInfoes
+                   .Include(c => c.User)
+                   .Where(c => c.User.Status == "active")
+                   .ToList();
             }
         }
     }

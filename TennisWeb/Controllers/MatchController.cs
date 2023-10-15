@@ -112,7 +112,10 @@ namespace TennisWeb.Controllers
             try
             {
                 var freeCoaches = Services.MatchService.GetFreeCoaches(date, id);
-
+                if(freeCoaches.Count == 0)
+                {
+                    return Json(new { success = false, error = "No free coaches available." }, JsonRequestBehavior.AllowGet);
+                }
                 return Json(new { success = true, coaches = freeCoaches }, JsonRequestBehavior.AllowGet);
             }
             catch(Exception ex)

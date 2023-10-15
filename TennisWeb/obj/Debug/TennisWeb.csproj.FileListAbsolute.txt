@@ -68,3 +68,4 @@ D:\Learnings\TennisWeb\TennisWeb\obj\Debug\TennisWeb.csproj.GenerateResource.cac
 D:\Learnings\TennisWeb\TennisWeb\obj\Debug\TennisWeb.Migrations.UpdateSlotModelTimeType.resources
 D:\Learnings\TennisWeb\TennisWeb\obj\Debug\TennisWeb.Migrations.relationchanged.resources
 D:\Learnings\TennisWeb\TennisWeb\obj\Debug\TennisWeb.Migrations.matchplayernew.resources
+D:\Learnings\TennisWeb\TennisWeb\obj\Debug\TennisWeb.Migrations.PrimaryKeyInSlot.resources

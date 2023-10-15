@@ -70,5 +70,20 @@ namespace TennisWeb.Controllers
              
         }
 
+
+        [HttpGet]
+        public JsonResult ChangeStatus(int id)
+        {
+
+            // Your logic to assign the role based on the id and role parameters
+            // ...
+            var result = Services.SlotService.ChangeStatus(id);
+
+
+            return Json(new { success = true, message = result }, JsonRequestBehavior.AllowGet);
+
+
+        }
+
     }
 }

@@ -6,7 +6,9 @@
 <head>
     <!-- DataTables -->
     <link rel="stylesheet" href="~/Assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css" />
+<link rel="stylesheet" href="~/Assets/plugins/datatables-responsive/css/responsive.bootstrap4.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" />
+
     <style>
         td a{
             cursor:pointer;
@@ -96,11 +98,23 @@
 
 <script src="~/Assets/plugins/datatables/jquery.dataTables.js"></script>
 <script src="~/Assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<script src="~/Assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
     $(function () {
-        $('#user_table').DataTable();
+        $('#user_table').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "columnDefs": [
+                { "orderable": true }
+            ]
+        });
     });
     // Edit button click event
     $('.edit-button').click(function () {

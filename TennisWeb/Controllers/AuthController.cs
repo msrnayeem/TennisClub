@@ -34,13 +34,10 @@ namespace TennisWeb.Controllers
                 Session["Role"] = role;
                 Session["Email"] = form["Email"];
                 return RedirectToAction("Dashboard", "User");
-            }           
-            else if (status == "blocked")
-            {
-                TempData["ErrorMessage"] = "User is blocked, contact admin";
-                return RedirectToAction("Login"); 
             }
-            TempData["ErrorMessage"] = "Invalid email or password";
+
+            TempData["msg"] = "Invalid email or password";
+
             return RedirectToAction("Login");
         }
 

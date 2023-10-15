@@ -163,6 +163,10 @@
     <Compile Include="Migrations\202310131655561_matchplayernew.designer.cs">
       <DependentUpon>202310131655561_matchplayernew.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202310150546368_PrimaryKeyInSlot.cs" />
+    <Compile Include="Migrations\202310150546368_PrimaryKeyInSlot.designer.cs">
+      <DependentUpon>202310150546368_PrimaryKeyInSlot.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\SlotModel.cs" />
@@ -2347,6 +2351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202310131655561_matchplayernew.resx">
       <DependentUpon>202310131655561_matchplayernew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202310150546368_PrimaryKeyInSlot.resx">
+      <DependentUpon>202310150546368_PrimaryKeyInSlot.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

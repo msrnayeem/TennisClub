@@ -68,7 +68,7 @@ namespace TennisWeb.Services
             {
                 //  var booked = Services.MatchService.GetBookedSlots(DateTime.Now);
                 var bookedSlotIds =  Services.MatchService.GetBookedSlots(date);
-                var allSlots = db.Slots.ToList();
+                var allSlots = db.Slots.Where(s=> s.Status == true).ToList();
 
                 var freeSlots = allSlots
                 .Where(slot => !bookedSlotIds.Contains(slot.Id))
@@ -83,6 +83,24 @@ namespace TennisWeb.Services
             .   ToList<object>();
 
                 return freeSlots;
+            }
+        }
+
+        public static bool ChangeStatus(int id)
+        {
+            using (var db = new TennisContext())
+            {
+                var slot = db.Slots.Find(id);
+                if (slot == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    slot.Status = !slot.Status;
+                    db.SaveChanges();
+                    return true;
+                }
             }
         }
     }
