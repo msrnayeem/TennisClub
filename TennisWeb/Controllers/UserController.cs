@@ -43,23 +43,5 @@ namespace TennisWeb.Controllers
             return View(user);
         }
 
-        public ActionResult ChnageStatus(int id)
-        {
-            var user = Services.UserService.ChnageStatus(id);
-
-            if(user)
-            {
-                TempData["SuccessMessage"] = "Status changed successfully!";
-                return RedirectToAction("UserList");
-            }
-            else
-            {
-                TempData["SuccessMessage"] = "Error changing status!";
-                return RedirectToAction("UserList");
-            }
-        }
-
-        
-        
     }
 }

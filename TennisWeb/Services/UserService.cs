@@ -36,40 +36,86 @@ namespace TennisWeb.Services
             }
         }
 
-        public static bool ChnageStatus(int id)
+        public static string ChangeStatus(int id)
         {
-            using (var db = new TennisContext())
+            try
             {
-                var user = db.Users.FirstOrDefault(u => u.Id == id);
-                if (user != null)
+                using (var db = new TennisContext())
                 {
-                   if(user.Status == "active")
+                    var user = db.Users.FirstOrDefault(u => u.Id == id);
+                    if (user != null)
                     {
-                        user.Status = "inactive";
+                        if (user.Status == "active")
+                        {
+                            user.Status = "inactive";
+                        }
+                        else
+                        {
+                            user.Status = "active";
+                        }
+
+                        db.SaveChanges();
+                        return "changed";
                     }
-                    else
-                    {
-                        user.Status = "active";
-                    }   
-                    return db.SaveChanges() > 0;
+                    return "not found.";
                 }
-                return false;
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception, log it, etc.
+                return "Error changing status: " + ex.Message;
             }
         }
+
 
         public static bool AssignRole(int id, string role)
         {
             using (var db = new TennisContext())
             {
-                var user = db.Users.FirstOrDefault(u => u.Id == id); // Here is the correction
-                if (user != null)
+                using (var transaction = db.Database.BeginTransaction())
                 {
-                    user.Role = role;
-                    user.Status = "active";
-                    return db.SaveChanges() > 0;
+                    try
+                    {
+                        var user = db.Users.FirstOrDefault(u => u.Id == id); // Here is the correction
+                        if (user != null)
+                        {
+                            user.Role = role;
+                            user.Status = "active";
+
+                            if (role == "player")
+                            {
+                                var playerInfo = new PlayerInfo
+                                {
+                                    UserId = user.Id,
+                                    // Set other properties for PlayerInfo as needed
+                                };
+                                db.PlayerInfoes.Add(playerInfo);
+                            }
+                            else if (role == "coach")
+                            {
+                                var coachInfo = new CoachInfo
+                                {
+                                    UserId = user.Id,
+                                    // Set other properties for CoachInfo as needed
+                                };
+                                db.CoachInfoes.Add(coachInfo);
+                            }
+
+                            db.SaveChanges();
+                            transaction.Commit();
+                            return true;
+                        }
+                        return false;
+                    }
+                    catch (Exception)
+                    {
+                        // Handle exception, log it if necessary
+                        transaction.Rollback();
+                        return false;
+                    }
                 }
-                return false;
             }
+
         }
 
 

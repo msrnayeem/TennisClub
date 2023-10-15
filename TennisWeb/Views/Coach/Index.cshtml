@@ -51,14 +51,21 @@
                                             <td>@coach.Name</td>
                                             <td> @coach.User.Email </td>
                                             <td>@coach.User.Status</td>
-                                            <td>Action</td>
+                                            <td>
+                                                <a class="change-status" href="#" data-edit-id="@coach.Id">
+                                                    '<i class="fa fa-edit"></i>
+                                                </a> ||
+                                                <a class="delete" href="#" data-delete-id="@coach.Id">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                     }
                                 }
                                 else
                                 {
                                     <tr class="text-center">
-                                        <td colspan="4">No Users Found</td>
+                                        <td colspan="4">No Coach Found</td>
                                     </tr>
                                 }
 
@@ -95,6 +102,129 @@
             ]
         });
     });
+
+
+
+    $('.delete').on('click', function(event) {
+        event.preventDefault();
+
+            var deleteId = parseInt($(this).data("delete-id"));
+            
+        Swal.fire({
+            title: 'Delete Coach ?',
+            text: 'Are you sure you want to delete this user?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                var url = '@Url.Action("DeleteCoach", "Coach", new { id = "PLACEHOLDER" })'.replace('PLACEHOLDER', deleteId);
+                $.ajax({
+                    url: url, // Replace with the actual endpoint URL
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        
+                        if (response.success) {
+                            Swal.fire({
+                                title: 'Success!',
+                                text: response.message,
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                                allowOutsideClick: false
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
+                        }
+                        else {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: response.message,
+                                icon: 'error',
+                                confirmButtonText: 'OK',
+                                allowOutsideClick: false
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                        Swal.fire({
+                            title: 'Error!',
+                            text: error.message,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+            }
+        });
+
+    });
+
+    $('.change-status').on('click', function(event) {
+        event.preventDefault();
+
+        Swal.fire({
+            title: 'Change Status ?',
+            text: 'Are you sure you want to change status?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var editId = parseInt($(this).data("edit-id"));
+                var url = '@Url.Action("ChangeStatus", "Coach", new { id = "PLACEHOLDER" })'.replace('PLACEHOLDER', editId);
+                $.ajax({
+                    url: url, // Replace with the actual endpoint URL
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+
+                        if (response.success) {
+                            Swal.fire({
+                                title: 'Success!',
+                                text: response.message,
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                                allowOutsideClick: false
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
+                        }
+                        else {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: response.message,
+                                icon: 'error',
+                                confirmButtonText: 'OK',
+                                allowOutsideClick: false
+                            });
+                        }
+                    },
+                    error: function (error) {
+
+                        Swal.fire({
+                            title: 'Error!',
+                            text: error.message,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+            }
+        });
+
+    });
+
+
+
 </script>
 
 

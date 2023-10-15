@@ -69,3 +69,4 @@ D:\Learnings\TennisWeb\TennisWeb\obj\Debug\TennisWeb.Migrations.UpdateSlotModelT
 D:\Learnings\TennisWeb\TennisWeb\obj\Debug\TennisWeb.Migrations.relationchanged.resources
 D:\Learnings\TennisWeb\TennisWeb\obj\Debug\TennisWeb.Migrations.matchplayernew.resources
 D:\Learnings\TennisWeb\TennisWeb\obj\Debug\TennisWeb.Migrations.PrimaryKeyInSlot.resources
+D:\Learnings\TennisWeb\TennisWeb\obj\Debug\TennisWeb.Migrations.PlayerCoachTable.resources

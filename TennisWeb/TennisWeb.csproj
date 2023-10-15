@@ -167,6 +167,10 @@
     <Compile Include="Migrations\202310150546368_PrimaryKeyInSlot.designer.cs">
       <DependentUpon>202310150546368_PrimaryKeyInSlot.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202310150846238_PlayerCoachTable.cs" />
+    <Compile Include="Migrations\202310150846238_PlayerCoachTable.designer.cs">
+      <DependentUpon>202310150846238_PlayerCoachTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\SlotModel.cs" />
@@ -2354,6 +2358,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202310150546368_PrimaryKeyInSlot.resx">
       <DependentUpon>202310150546368_PrimaryKeyInSlot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202310150846238_PlayerCoachTable.resx">
+      <DependentUpon>202310150846238_PlayerCoachTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -6,11 +6,6 @@
 }
 
 
-<head>
-    <!-- DataTables -->
-    <link rel="stylesheet" href="~/Assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css" />
-<link rel="stylesheet" href="~/Assets/plugins/datatables-responsive/css/responsive.bootstrap4.css" />
-</head>
 <div class="container-fluid">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -57,7 +52,14 @@
                                             <td> @player.User.Email </td>
                                             <td>@player.PlayingPosition</td>
                                             <td>@player.User.Status</td>
-                                            <td>Action</td>
+                                            <td class="text-center">
+                                                <a class="change-status" href="#" data-edit-id="@player.Id">
+                                                    '<i class="fa fa-edit"></i>
+                                                </a> ||
+                                                <a class="delete" href="#" data-delete-id="@player.Id">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                     }
                                 }
@@ -82,10 +84,6 @@
     </section>
 </div>
 
-<script src="~/Assets/plugins/datatables/jquery.dataTables.js"></script>
-<script src="~/Assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
-<script src="~/Assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-
 <script>
     $(function () {
         $('#player_table').DataTable({
@@ -100,5 +98,122 @@
                 { "orderable": true }
             ]
         });
+
+    $('.delete').on('click', function(event) {
+        event.preventDefault();
+
+            var deleteId = parseInt($(this).data("delete-id"));
+            console.log(deleteId);
+        Swal.fire({
+            title: 'Delete Player ?',
+            text: 'Are you sure you want to delete this user?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                var url = '@Url.Action("DeletePlayer", "Player", new { id = "PLACEHOLDER" })'.replace('PLACEHOLDER', deleteId);
+                $.ajax({
+                    url: url, // Replace with the actual endpoint URL
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: 'Success!',
+                                text: response.message,
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                                allowOutsideClick: false
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
+                        }
+                        else {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: response.message,
+                                icon: 'error',
+                                confirmButtonText: 'OK',
+                                allowOutsideClick: false
+                            });
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                        Swal.fire({
+                            title: 'Error!',
+                            text: error.message,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+            }
+        });
+
     });
+
+    $('.change-status').on('click', function(event) {
+        event.preventDefault();
+
+        Swal.fire({
+            title: 'Change Status ?',
+            text: 'Are you sure you want to change status?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var editId = parseInt($(this).data("edit-id"));
+                var url = '@Url.Action("ChangeStatus", "Player", new { id = "PLACEHOLDER" })'.replace('PLACEHOLDER', editId);
+                $.ajax({
+                    url: url, // Replace with the actual endpoint URL
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (response) {
+                      
+                        if (response.success) {
+                            Swal.fire({
+                                title: 'Success!',
+                                text: response.message,
+                                icon: 'success',
+                                confirmButtonText: 'OK',
+                                allowOutsideClick: false
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.reload();
+                                }
+                            });
+                        }
+                        else {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: response.message,
+                                icon: 'error',
+                                confirmButtonText: 'OK',
+                                allowOutsideClick: false
+                            });
+                        }
+                    },
+                    error: function (error) {
+                       
+                        Swal.fire({
+                            title: 'Error!',
+                            text: error.message,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+            }
+        });
+
+    });
+});
 </script>
