@@ -69,6 +69,25 @@
                 <a href="#" class="small-box-footer text-dark">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
+        <div class="col-lg-4 col-lg-6">
+            <div class="small-box card">
+                @{
+                    // Retrieve values from Session variables
+                    var role = Session["Role"] as string;
+                    var email = Session["Email"] as string;
+                }
+
+                @if (role != null && email != null)
+                {
+                    <p>Welcome, @role! Your email is: @email</p>
+                }
+                else
+                {
+                    <p>Session variables not set or expired.</p>
+                }
+
+            </div> 
+        </div>
 
     </div>
 </div>

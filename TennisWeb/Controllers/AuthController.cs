@@ -51,7 +51,7 @@ namespace TennisWeb.Controllers
             return RedirectToAction("Login");
         }
 
-
+        
         public ActionResult Logout()
         {
             Session["Role"] = null;
