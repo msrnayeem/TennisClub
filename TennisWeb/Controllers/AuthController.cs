@@ -29,7 +29,7 @@ namespace TennisWeb.Controllers
         {
             var (role, status) = AuthService.AuthUser(form["Email"], form["Password"]);
 
-            if (role != null && status != null)
+            if (role != null && status == "active")
             {
                 Session["Role"] = role;
                 Session["Email"] = form["Email"];

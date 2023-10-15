@@ -10,19 +10,24 @@ namespace TennisWeb.Services
 {
     public class AuthService
     {
-        public static (string Role, string Status) AuthUser(string Email, string Password)
+        public static (string Role, string Status) AuthUser(string email, string password)
         {
             using (var db = new TennisContext())
             {
-                var password = Crypto.HashPassword(Password);
-                var user = db.Users.SingleOrDefault(u => u.Email == Email && u.Password == password);
+                
+                var user = db.Users.SingleOrDefault(u => u.Email == email);
 
                 if (user != null && user.Status == "inactive")
                 {
                     return (null, "inactive");
                 }
-
-                return user != null && user.Status != "inactive" ? (user.Role, user.Status) : (null, null);
+                else if (user != null && Crypto.VerifyHashedPassword(user.Password, password))
+                {
+                    return (user.Role, user.Status);
+                }
+               
+                return (null, null);
+                
             }
         }
 
