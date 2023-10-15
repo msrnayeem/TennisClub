@@ -1,0 +1,558 @@
+﻿<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="~/Scripts/FrontEnd/jquery.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/FrontEnd/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/FrontEnd/tt_slideshow.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/FrontEnd/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/FrontEnd/customjs.js"></script>
+
+
+    <script type="text/javascript" src="~/Scripts/FrontEnd/contactform.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+        Tennis Club
+    </title>
+
+    <link rel="stylesheet" href="~/Content/FrontEnd/bootstrap.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/Content/FrontEnd/style.css" type="text/css" media="screen" />
+
+    <!--[if lte IE 8]>
+    <link rel="stylesheet"  href="~/Content/FrontEnd/menuie.css" type="text/css" media="screen"/>
+    <link rel="stylesheet"  href="~/Content/FrontEnd/vmenuie.css" type="text/css" media="screen"/>
+    <![endif]-->
+    <script type="text/javascript" src="~/Scripts/FrontEnd/totop.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/FrontEnd/tt_animation.js"></script>
+    <!--[if IE 7]>
+    <style type="text/css" media="screen">
+    #ttr_vmenu_items  li.ttr_vmenu_items_parent {margin-left:-16px;font-size:0px;}
+    </style>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="~/Scripts/FrontEnd/html5shiv.js">
+    </script>
+    <script type="text/javascript" src="~/Scripts/FrontEnd/respond.min.js">
+    </script>
+    <![endif]-->
+</head>
+
+
+    <body class="index">
+        @Html.Partial("~/Views/Shared/FrontComponent/_Header.cshtml")
+        <div class="ttr_banner_slideshow">
+        </div>
+        <div class="ttr_slideshow">
+            <div class="margin_collapsetop"></div>
+            <div id="ttr_slideshow_inner">
+                <ul>
+                    <li id="Slide0" class="ttr_slide" data-slideEffect="Fade">
+                        <a href="@Url.Action("Index", "FrontEnd")"></a>
+                        <div class="ttr_slideshow_last">
+                            <div class="ttr_slideshow_element_alignment container" data-begintime="0" data-effect="Fade"
+                                 data-easing="linear" data-slide="None" data-duration="0">
+                            </div>
+                            <div class="ttr_slideshowshape01" data-effect="None" data-begintime="0" data-duration="1"
+                                 data-easing="linear" data-slide="top">
+                                <div class="html_content">
+                                    <p style="margin:5px 0px 5px 20px;line-height:8.19em;">
+                                        <span style="font-family:'Expletus Sans','Arial';font-style:italic;font-weight:700;font-size:5.714em;color:rgba(255,255,255,1);background-color:transparent;">
+                                            A
+                                            Great Tennis Community
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="Slide1" class="ttr_slide" data-slideEffect="Fade">
+                        <a href="@Url.Action("Index", "FrontEnd")"></a>
+                        <div class="ttr_slideshow_last">
+                            <div class="ttr_slideshow_element_alignment container" data-begintime="0" data-effect="Fade"
+                                 data-easing="linear" data-slide="None" data-duration="0">
+                            </div>
+                            <div class="ttr_slideshowshape11" data-effect="None" data-begintime="0" data-duration="1"
+                                 data-easing="linear" data-slide="top">
+                                <div class="html_content">
+                                    <p style="margin:5px 0px 5px 20px;line-height:8.19em;">
+                                        <span style="font-family:'Expletus Sans','Arial';font-style:italic;font-weight:700;font-size:5.714em;color:rgba(255,255,255,1);background-color:transparent;">
+                                            Coaching
+                                            Programs for All
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="Slide2" class="ttr_slide" data-slideEffect="Fade">
+                        <a href="@Url.Action("Index", "FrontEnd")"></a>
+                        <div class="ttr_slideshow_last">
+                            <div class="ttr_slideshow_element_alignment container" data-begintime="0" data-effect="Fade"
+                                 data-easing="linear" data-slide="None" data-duration="0">
+                            </div>
+                            <div class="ttr_slideshowshape21" data-effect="None" data-begintime="0" data-duration="1"
+                                 data-easing="linear" data-slide="top">
+                                <div class="html_content">
+                                    <p style="margin:5px 0px 5px 20px;line-height:8.19em;">
+                                        <span style="font-family:'Expletus Sans','Arial';font-weight:700;font-size:5.714em;color:rgba(255,255,255,1);background-color:transparent;">
+                                            Leagues
+                                            and Tournaments
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="ttr_slideshow_in">
+                <div class="ttr_slideshow_last">
+                    <div id="nav"></div>
+                    <div class="ttr_slideshow_logo">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ttr_banner_slideshow">
+        </div>
+        <div class="margin_collapsetop"></div>
+        <div id="ttr_page" class="container">
+            <div id="ttr_content_and_sidebar_container">
+                <div id="ttr_content">
+                    <div id="ttr_html_content_margin" class="container-fluid">
+                        <div class="margin_collapsetop"></div>
+
+                        <div class="ttr_index_html_row1 row">
+                            <div class="post_column col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column10">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content">
+                                        <p style="margin:5px 0px 20px 0px;text-align:Center;">
+                                            <span style="font-family:'Expletus Sans','Arial';font-weight:700;font-size:2.571em;color:rgba(17,38,0,1);background-color:transparent;">
+                                                Welcome
+                                                to Tennis Club!
+                                            </span>
+                                        </p>
+                                        <p style="margin:2px 0px 10px 0px;text-align:Center;">
+                                            <span style="font-size:1.571em;color:rgba(85,212,0,1);">
+                                                Sit nibh ultrices integer.
+                                                Ac dignissim semper risus.
+                                            </span>
+                                        </p>
+                                        <p style="margin:2px 0px 0px 0px;text-align:Center;line-height:1.71em;">
+                                            <span style="color:rgba(78,78,78,1);">
+                                                Montes est lacus dui ac amet suscipit nulla
+                                                nisl. Wisi consectetur porttitor adipiscing mattis ante. Libero quam
+                                                sagittis. Dolor vivamus nec nulla ut augue tincidunt etiam eros id sodales
+                                                maecenas. Accumsan wisi lectus.
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                            <div class="post_column col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column11">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content">
+                                        <p>
+                                            <span class="ttr_image"
+                                                  style="float:Left;overflow:hidden;margin:10px 10px 10px 10px;">
+                                                <span>
+                                                    <img class="ttr_uniform" style="max-height:200px;max-width:245px;"
+                                                         src="~/Assets/images/35.jpeg" />
+                                                </span>
+                                            </span><span class="ttr_image"
+                                                         style="float:Left;overflow:hidden;margin:10px 10px 10px 10px;">
+                                                <span>
+                                                    <img class="ttr_uniform" style="max-height:200px;max-width:245px;"
+                                                         src="~/Assets/images/36.jpeg" />
+                                                </span>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                        </div>
+                        <div class="ttr_index_html_row2 row">
+                            <div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column20">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content">
+                                        <p style="margin:5px 0px 10px 0px;text-align:Center;">
+                                            <span class="ttr_image"
+                                                  style="float:none;display:block;overflow:hidden;margin:0px 0px 20px 0px;">
+                                                <span>
+                                                    <img class="ttr_uniform" style="max-height:100px;max-width:100px;"
+                                                         src="~/Assets/images/37.png" />
+                                                </span>
+                                            </span><span style="font-family:'Expletus Sans','Arial';font-weight:700;font-size:1.571em;color:rgba(17,38,0,1);background-color:transparent;">Championships</span>
+                                        </p>
+                                        <p style="margin:2px 0px 0px 0px;text-align:Center;line-height:1.71em;">
+                                            <span style="color:rgba(78,78,78,1);">
+                                                Lacus&nbsp;&nbsp;vestibulum iaculis. Nulla
+                                                mattis omnis. Sit volutpat eleifend. A montes ipsum pulvinar sollicitudin
+                                                nunc.
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                            <div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column21">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content">
+                                        <p style="margin:5px 0px 10px 0px;text-align:Center;">
+                                            <span class="ttr_image"
+                                                  style="float:none;display:block;overflow:hidden;margin:0px 0px 20px 0px;padding:0px 0px 0px 0px;">
+                                                <span>
+                                                    <img class="ttr_uniform" style="max-height:100px;max-width:100px;"
+                                                         src="~/Assets/images/38.png" />
+                                                </span>
+                                            </span><span style="font-family:'Expletus Sans','Arial';font-weight:700;font-size:1.571em;color:rgba(17,38,0,1);background-color:transparent;">Coaching</span>
+                                        </p>
+                                        <p style="margin:2px 0px 0px 0px;text-align:Center;line-height:1.71em;">
+                                            <span style="color:rgba(78,78,78,1);">
+                                                Lacus&nbsp;&nbsp;vestibulum iaculis. Nulla
+                                                mattis omnis. Sit volutpat eleifend. A montes ipsum pulvinar sollicitudin
+                                                nunc.
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                            <div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column22">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content">
+                                        <p style="margin:5px 0px 10px 0px;text-align:Center;">
+                                            <span class="ttr_image"
+                                                  style="float:none;display:block;overflow:hidden;margin:0px 0px 20px 0px;padding:0px 0px 0px 0px;">
+                                                <span>
+                                                    <img class="ttr_uniform" style="max-height:100px;max-width:100px;"
+                                                         src="~/Assets/images/39.png" />
+                                                </span>
+                                            </span><span style="font-family:'Expletus Sans','Arial';font-weight:700;font-size:1.571em;color:rgba(17,38,0,1);background-color:transparent;">Membership</span>
+                                        </p>
+                                        <p style="margin:2px 0px 0px 0px;text-align:Center;line-height:1.71em;">
+                                            <span style="color:rgba(78,78,78,1);">
+                                                Lacus&nbsp;&nbsp;vestibulum iaculis. Nulla
+                                                mattis omnis. Sit volutpat eleifend. A montes ipsum pulvinar sollicitudin
+                                                nunc.
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                            <div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column23">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content">
+                                        <p style="margin:5px 0px 10px 0px;text-align:Center;">
+                                            <span class="ttr_image"
+                                                  style="float:none;display:block;overflow:hidden;margin:0px 0px 20px 0px;padding:0px 0px 0px 0px;">
+                                                <span>
+                                                    <img class="ttr_uniform" style="max-height:100px;max-width:100px;"
+                                                         src="~/Assets/images/40.png" />
+                                                </span>
+                                            </span><span style="font-family:'Expletus Sans','Arial';font-weight:700;font-size:1.571em;color:rgba(17,38,0,1);background-color:transparent;">Events</span>
+                                        </p>
+                                        <p style="margin:2px 0px 0px 0px;text-align:Center;line-height:1.71em;">
+                                            <span style="color:rgba(78,78,78,1);">
+                                                Lacus&nbsp;&nbsp;vestibulum iaculis. Nulla
+                                                mattis omnis. Sit volutpat eleifend. A montes ipsum pulvinar sollicitudin
+                                                nunc.
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                        </div>
+                        <div class="ttr_index_html_row3 row">
+                            <div class="post_column col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column30">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content">
+                                        <p style="margin:5px 0px 20px 0px;text-align:Center;">
+                                            <span style="font-family:'Expletus Sans','Arial';font-weight:700;font-size:2.857em;color:rgba(255,255,255,1);background-color:transparent;">
+                                                In
+                                                Tennis, it is not the Opponent you Fear, it is the Failure itself, Knowing
+                                                how near you were but just out of Reach.
+                                            </span>
+                                        </p>
+                                        <p style="text-align:Center;">
+                                            <span style="font-family:'Expletus Sans','Arial';font-weight:700;font-size:2.143em;color:rgba(85,212,0,1);background-color:transparent;">
+                                                Andy
+                                                Murray
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                        </div>
+                        <div class="ttr_index_html_row4 row">
+                            <div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column40">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content"><br /></div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                            <div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column41">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content">
+                                        <p style="margin:5px 0px 20px 0px;text-align:Center;">
+                                            <span style="font-family:'Expletus Sans','Arial';font-weight:700;font-size:2.571em;color:rgba(17,38,0,1);background-color:transparent;">
+                                                Where
+                                                Tennis Runs Through Veins
+                                            </span>
+                                        </p>
+                                        <p style="margin:2px 0px 10px 8px;text-align:Center;">
+                                            <span style="font-size:1.571em;color:rgba(52,52,52,1);">
+                                                Felis ante pretium cras
+                                                venenatis.
+                                            </span>
+                                        </p>
+                                        <p style="margin:2px 0px 20px 0px;text-align:Center;line-height:1.71em;">
+                                            <span style="color:rgba(78,78,78,1);">
+                                                Adipiscing magna morbi. Numquam nulla
+                                                imperdiet. Tempor quis in augue imperdiet lacinia. Facilisis porttitor fusce
+                                                mollis lorem purus.
+                                            </span>
+                                        </p>
+                                        <p style="margin:2px 0px 0px 0px;text-align:Center;line-height:1.71em;">
+                                            <span>
+                                                <a href="#" target="_self" class="btn btn-md btn-default">
+                                                    Best Membership
+                                                    Plan
+                                                </a>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                            <div class="post_column col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column42">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content"><br /></div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                        </div>
+                        <div class="ttr_index_html_row5 row">
+                            <div class="post_column col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column50">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content">
+                                        <p style="text-align:Center;">
+                                            <span style="font-family:'Expletus Sans','Arial';font-weight:700;font-size:2.571em;color:rgba(17,38,0,1);background-color:transparent;">
+                                                Game
+                                                Highlights
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                            <div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column51">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content"><br /></div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                            <div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column52">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content"><br /></div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                            <div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column53">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content"><br /></div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-lg-block d-xl-block d-lg-block visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                            <div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column54">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content"><br /></div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                            <div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column55">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content"><br /></div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                            <div class="post_column col-xl-4 col-lg-4 col-md-6 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column56">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content"><br /></div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                        </div>
+                        <div class="ttr_index_html_row6 row">
+                            <div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column60">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content">
+                                        <p>
+                                            <span class="ttr_image"
+                                                  style="float:none;display:block;overflow:hidden;margin:0px 0px 0px 0px;">
+                                                <span>
+                                                    <img class="ttr_uniform" style="max-height:139px;max-width:200px;"
+                                                         src="~/Assets/images/41.png" />
+                                                </span>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                            <div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column61">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content">
+                                        <p>
+                                            <span class="ttr_image"
+                                                  style="float:none;display:block;overflow:hidden;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;">
+                                                <span>
+                                                    <img class="ttr_fill" style="height:139px;max-width:200px;"
+                                                         src="~/Assets/images/42.png" />
+                                                </span>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                            <div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column62">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content">
+                                        <p>
+                                            <span class="ttr_image"
+                                                  style="float:none;display:block;overflow:hidden;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;">
+                                                <span>
+                                                    <img class="ttr_fill" style="height:139px;max-width:200px;"
+                                                         src="~/Assets/images/43.png" />
+                                                </span>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                            <div class="post_column col-xl-3 col-lg-3 col-md-6 col-sm-12 col-xs-12 col-12">
+                                <div class="ttr_index_html_column63">
+                                    <div class="margin_collapsetop"></div>
+                                    <div class="html_content">
+                                        <p>
+                                            <span class="ttr_image"
+                                                  style="float:none;display:block;overflow:hidden;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;">
+                                                <span>
+                                                    <img class="ttr_fill" style="height:139px;max-width:200px;"
+                                                         src="~/Assets/images/44.png" />
+                                                </span>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="margin_collapsetop"></div>
+                                    <div style="clear:both;width:0px;"></div>
+                                </div>
+                            </div>
+                            <div class=" visible-lg-block d-xl-block d-lg-block visible-md-block d-md-block visible-sm-block d-sm-block visible-xs-block d-block"
+                                 style="clear: both;width:0px;"></div>
+                        </div>
+                        <div class="margin_collapsetop"></div>
+                    </div><!--content_margin-->
+                </div><!--content-->
+                <div style="clear:both">
+                </div>
+            </div><!--container-->
+        </div><!--page-->
+        @Html.Partial("~/Views/Shared/FrontComponent/_Footer.cshtml")
+    </body>
+
+</html>
