@@ -100,7 +100,7 @@ namespace TennisWeb.Services
 
         public static List<object> GetFreeCoaches(DateTime Date, int id)
         {
-            var allCoaches = CoachService.GetCoaches();
+            var allCoaches = CoachService.GetActiveCoaches();
 
             var BookedCoaches = GetMatches().Where(m => m.SlotId == id && m.Time == Date).Select(m => m.CoachId).ToList();
 

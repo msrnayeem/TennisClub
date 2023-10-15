@@ -17,7 +17,7 @@ namespace TennisWeb.Controllers
             {
                 TempData["msg"] = TempData["SuccessMessage"] as string;
 
-                var players = Services.PlayerService.GetPlayers();
+                var players = Services.PlayerService.GetActivePlayers();
                 var playerSelectList = new SelectList(players, "Id", "Name");
 
                 ViewBag.allPlayers = playerSelectList;

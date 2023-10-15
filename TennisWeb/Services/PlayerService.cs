@@ -18,6 +18,17 @@ namespace TennisWeb.Services
             }
         }
 
-        
+        public static List<CoachInfo> GetActivePlayers()
+        {
+            using (var db = new TennisContext())
+            {
+                return db.CoachInfoes
+                   .Include(c => c.User)
+                   .Where(c => c.User.Status == "active")
+                   .ToList();
+            }
+        }
+
+
     }
 }

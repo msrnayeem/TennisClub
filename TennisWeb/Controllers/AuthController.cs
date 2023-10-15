@@ -35,9 +35,19 @@ namespace TennisWeb.Controllers
                 Session["Email"] = form["Email"];
                 return RedirectToAction("Dashboard", "User");
             }
-
-            TempData["msg"] = "Invalid email or password";
-
+            else if(role == null && status == null)
+            {
+                TempData["msg"] = "Email/Password not matched";
+            }
+            else if(role == null && status == "inactive")
+            {
+                TempData["msg"] = "Your account is inactive";
+            }
+            else
+            {
+                TempData["msg"] = "Something went wrong";
+            }   
+            
             return RedirectToAction("Login");
         }
 
