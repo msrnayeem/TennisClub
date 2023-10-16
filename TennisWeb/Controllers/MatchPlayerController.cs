@@ -5,12 +5,13 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using TennisWeb.CF;
+using TennisWeb.Filter;
 
 namespace TennisWeb.Controllers
 {
     public class MatchPlayerController : Controller
     {
-        // GET: MatchPlayer
+        [Authorize]
         public ActionResult Index(int id)
         {
             try
@@ -41,6 +42,7 @@ namespace TennisWeb.Controllers
 
         //create a new match player
         [HttpPost]
+        [Admin]
         public ActionResult Store(FormCollection form)
         {
             // Get match ID from form data
@@ -79,9 +81,9 @@ namespace TennisWeb.Controllers
             return RedirectToAction("Index", "MatchPlayer", new { id = matchId });
 
 
-        }  
-        
+        }
 
+        [Admin]
         public ActionResult Delete(int matchId, int playerId)
         {
             try

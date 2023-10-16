@@ -5,10 +5,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TennisWeb.CF;
+using TennisWeb.Filter;
 using TennisWeb.Models;
 
 namespace TennisWeb.Controllers
 {
+    [Admin]
     public class SlotController : Controller
     {
         // GET: Slot

@@ -33,29 +33,69 @@
 					</div>
 				</div>
 				<div class="menu-center collapse navbar-collapse">
-					<ul class="ttr_menu_items nav navbar-nav navbar-right">
-						<li class="ttr_menu_items_parent dropdown active">
-							<a href="@Url.Action("Index", "FrontEnd")"
-							   class="ttr_menu_items_parent_link_active">
-								<span class="menuchildicon"></span>Home
-							</a>
-							<hr class="horiz_separator" />
-						</li> <!-- main menu list closing -->
-						<li class="ttr_menu_items_parent dropdown">
-							<a href="@Url.Action("About", "FrontEnd")"
-							   class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Our Club</a>
-							<hr class="horiz_separator" />
-						</li> <!-- main menu list closing -->
-						<li class="ttr_menu_items_parent dropdown">
-							<a href="membership.html"
-							   class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Membership</a>
-							<hr class="horiz_separator" />
-						</li> <!-- main menu list closing -->
-						<li class="ttr_menu_items_parent dropdown">
-							<a href="contact.html"
-							   class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Contact</a>
-						</li> <!-- main menu list closing -->
-					</ul>
+                    <ul class="ttr_menu_items nav navbar-nav navbar-right">
+                        <li class="ttr_menu_items_parent dropdown active">
+                            <a href="@Url.Action("Index", "FrontEnd")"
+                               class="ttr_menu_items_parent_link_active">
+                                <span class="menuchildicon"></span>Home
+                            </a>
+                            <hr class="horiz_separator" />
+                        </li> <!-- main menu list closing -->
+                        @if (!Request.IsAuthenticated)
+                        {
+                            <li class="ttr_menu_items_parent dropdown">
+                                <a href="@Url.Action("About", "FrontEnd")"
+                                   class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Our Club</a>
+                                <hr class="horiz_separator" />
+                            </li>
+                            <!-- main menu list closing -->
+
+                            <li class="ttr_menu_items_parent dropdown">
+                                <a href="@Url.Action("Contact", "FrontEnd")"
+                                   class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Contact</a>
+                                <hr class="horiz_separator" />
+                            </li>
+                            <!-- main menu list closing -->
+                        }
+                        @if (!Request.IsAuthenticated)
+                        {
+                            <li class="ttr_menu_items_parent dropdown">
+                                <a href="@Url.Action("Register", "Auth")"
+                                   class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Join</a>
+                                <hr class="horiz_separator" />
+                            </li>
+                            <!-- main menu list closing -->
+                            <li class="ttr_menu_items_parent dropdown">
+                                <a href="@Url.Action("Login", "Auth")"
+                                   class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Log In</a>
+                            </li>
+                            <!-- main menu list closing -->
+                        }
+                        else
+                        {
+                            <li class="ttr_menu_items_parent dropdown">
+                                <a href="@Url.Action("Contact", "FrontEnd")"
+                                   class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Contact</a>
+                                <hr class="horiz_separator" />
+                            </li>
+
+                            <li class="ttr_menu_items_parent dropdown">
+                                <a href="@Url.Action("Upcoming", "FrontEnd")"
+                                   class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Upcoming Match</a>
+                                <hr class="horiz_separator" />
+                            </li>
+                            <li class="ttr_menu_items_parent dropdown">
+                                <a href="@Url.Action("FrontProfile", "FrontEnd")"
+                                   class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Profile</a>
+                                <hr class="horiz_separator" />
+                            </li>
+                            <li class="ttr_menu_items_parent dropdown">
+                                <a href="@Url.Action("Logout", "Auth")"
+                                   class="ttr_menu_items_parent_link"><span class="menuchildicon"></span>Logout</a>
+                                <hr class="horiz_separator" />
+                            </li>
+                        }
+                    </ul>
 				</div>
 			</div>
 		</div>

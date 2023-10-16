@@ -140,6 +140,12 @@
                                                 to Tennis Club!
                                             </span>
                                         </p>
+                                        @if (Request.IsAuthenticated)
+                                        {
+                                            <p>Welcome, @User.Identity.Name</p>
+                                            <!-- Other authenticated user content goes here -->
+                                        }
+
                                         <p style="margin:2px 0px 10px 0px;text-align:Center;">
                                             <span style="font-size:1.571em;color:rgba(85,212,0,1);">
                                                 Sit nibh ultrices integer.

@@ -11,28 +11,22 @@ namespace TennisWeb.Filter
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (HttpContext.Current.Session["Email"] == null)
+            if (!HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                string errorMessage = "You do not have permission to access this page.";
-                filterContext.Result = new RedirectResult("~/Auth/Login?error=" + HttpUtility.UrlEncode(errorMessage));
+                filterContext.Result = new RedirectResult("~/Auth/Logout");
                 return;
             }
-
-            try
+            var role = AuthService.GetRole(HttpContext.Current.User.Identity.Name);
+            if (role != "admin")
             {
-                var role = AuthService.GetRole(HttpContext.Current.Session["Email"].ToString());
-                if (role != "admin")
-                {
-                    var redirectUrl = $"~/Auth/Login?error=You do not have permission to access this page.";
-                    filterContext.Result = new RedirectResult(redirectUrl);
-                }
-            }
-            catch (Exception)
-            {
-                filterContext.Result = new RedirectResult("~/Error"); // Example: Redirect to an error page
+                // Store the previous URL in the session
+                string url = filterContext.HttpContext.Request.UrlReferrer.ToString();
+                filterContext.Result = new RedirectResult(url);
+                return;
             }
 
             base.OnActionExecuting(filterContext);
         }
+
     }
 }

@@ -1,56 +1,102 @@
 ﻿@model TennisWeb.CF.User
-@{
-    ViewBag.Title = "Register";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="~/Scripts/FrontEnd/jquery.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/FrontEnd/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/FrontEnd/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/FrontEnd/customjs.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/FrontEnd/contactform.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+        Tennis Club || About Us
+    </title>
+
+    <link rel="stylesheet" href="~/Content/FrontEnd/bootstrap.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/Content/FrontEnd/style.css" type="text/css" media="screen" />
+
+    <!--[if lte IE 8]>
+    <link rel="stylesheet"  href="menuie.css" type="text/css" media="screen"/>
+    <link rel="stylesheet"  href="vmenuie.css" type="text/css" media="screen"/>
+    <![endif]-->
+    <script type="text/javascript" src="~/Scripts/FrontEnd/totop.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/FrontEnd/tt_animation.js"></script>
+    <!--[if IE 7]>
+    <style type="text/css" media="screen">
+    #ttr_vmenu_items  li.ttr_vmenu_items_parent {margin-left:-16px;font-size:0px;}
+    </style>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="~/Scripts/FrontEnd/html5shiv.js">
+    </script>
+    <script type="text/javascript" src="~/Scripts/FrontEnd/respond.min.js">
+    </script>
+    <![endif]-->
+</head>
 
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <h2>User Registration</h2>
-            @using (Html.BeginForm("Store", "Auth", FormMethod.Post, new { @class = "needs-validation", novalidate = "true" }))
-            {
-                <div class="form-group mb-4">
-                    @Html.LabelFor(model => model.Email)
-                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", required = "required" })
-                    <div class="invalid-feedback">Please enter a name.</div>
-                </div>
+<body class="our-club">
+    @Html.Partial("~/Views/Shared/FrontComponent/_Header.cshtml")
 
-                <div class="form-group mb-4">
-                    @Html.LabelFor(model => model.Password)
-                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", type = "text", required = "required" })
-                    <div class="invalid-feedback">Please enter a start time.</div>
-                </div>
+    <div class="container mt-4 mb-4">
+        <div class="row justify-content-center mt-4 mb-4">
+            <div class="col-md-4">
+                <h2>User Registration</h2>
+                @using (Html.BeginForm("Store", "Auth", FormMethod.Post, new { @class = "needs-validation", novalidate = "true" }))
+                {
+                    <div class="form-group mb-4">
+                        @Html.LabelFor(model => model.Email)
+                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", required = "required" })
+                        <div class="invalid-feedback">Please enter a name.</div>
+                    </div>
 
-                
+                    <div class="form-group mb-4">
+                        @Html.LabelFor(model => model.Password)
+                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", type = "text", required = "required" })
+                        <div class="invalid-feedback">Please enter a start time.</div>
+                    </div>
 
-                <button type="submit" class="btn btn-primary">Register</button>
-            }
+
+
+                    <button type="submit" class="btn btn-primary">Register</button>
+                }
+            </div>
         </div>
     </div>
-</div>
 
-<script>
-    // Example of form validation using Bootstrap's native validation classes
-    (function () {
-        'use strict';
+    <script>
+        // Example of form validation using Bootstrap's native validation classes
+        (function () {
+            'use strict';
 
-        var forms = document.querySelectorAll('.needs-validation');
+            var forms = document.querySelectorAll('.needs-validation');
 
-        Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (!form.checkValidity()) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
 
-                    form.classList.add('was-validated');
-                }, false);
-            });
-    })();
-</script>
-
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+        })();
+    </script>
 
 
+
+    @Html.Partial("~/Views/Shared/FrontComponent/_Footer.cshtml")
+</body>
+
+</html>

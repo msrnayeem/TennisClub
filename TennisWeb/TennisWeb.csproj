@@ -136,7 +136,6 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CoachController.cs" />
     <Compile Include="Controllers\FrontEndController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MatchController.cs" />
     <Compile Include="Controllers\MatchPlayerController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
@@ -571,9 +570,6 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Auth\login.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Shared\Component\_header.cshtml" />
@@ -594,6 +590,8 @@
     <Content Include="Views\FrontEnd\Index.cshtml" />
     <Content Include="Views\FrontEnd\About.cshtml" />
     <Content Include="Views\Shared\FrontComponent\_Footer.cshtml" />
+    <Content Include="Views\FrontEnd\Contact.cshtml" />
+    <Content Include="Views\FrontEnd\FrontProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

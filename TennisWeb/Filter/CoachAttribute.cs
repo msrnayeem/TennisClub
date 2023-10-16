@@ -11,30 +11,22 @@ namespace TennisWeb.Filter
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (HttpContext.Current.Session["Email"] == null)
+            if (!HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                filterContext.Result = new RedirectResult("~/Auth/Login");
+                filterContext.Result = new RedirectResult("~/Auth/Logout");
                 return;
             }
-
-            try
+            var role = AuthService.GetRole(HttpContext.Current.User.Identity.Name);
+            if (role != "coach")
             {
-                var role = AuthService.GetRole(HttpContext.Current.Session["Email"].ToString());
-                if (role != "coach")
-                {
-                    // Add an error message in the query parameter
-                    var redirectUrl = $"~/Auth/Login?error=You do not have permission to access this page.";
-                    filterContext.Result = new RedirectResult(redirectUrl);
-                }
-            }
-            catch (Exception)
-            {
-                // Handle exceptions that might occur during AuthService.GetRole method call
-                // Log the exception, redirect to an error page, or handle it as appropriate for your application
-                filterContext.Result = new RedirectResult("~/Error"); // Example: Redirect to an error page
+                // Store the previous URL in the session
+                string url = filterContext.HttpContext.Request.UrlReferrer.ToString();
+                filterContext.Result = new RedirectResult(url);
+                return;
             }
 
             base.OnActionExecuting(filterContext);
         }
+
     }
 }

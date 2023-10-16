@@ -1,0 +1,61 @@
+﻿
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="~/Scripts/FrontEnd/jquery.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/FrontEnd/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/FrontEnd/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/FrontEnd/customjs.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/FrontEnd/contactform.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+        Tennis Club || Profile
+    </title>
+
+    <link rel="stylesheet" href="~/Content/FrontEnd/bootstrap.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/Content/FrontEnd/style.css" type="text/css" media="screen" />
+
+    <!--[if lte IE 8]>
+    <link rel="stylesheet"  href="menuie.css" type="text/css" media="screen"/>
+    <link rel="stylesheet"  href="vmenuie.css" type="text/css" media="screen"/>
+    <![endif]-->
+    <script type="text/javascript" src="~/Scripts/FrontEnd/totop.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/FrontEnd/tt_animation.js"></script>
+    <!--[if IE 7]>
+    <style type="text/css" media="screen">
+    #ttr_vmenu_items  li.ttr_vmenu_items_parent {margin-left:-16px;font-size:0px;}
+    </style>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="~/Scripts/FrontEnd/html5shiv.js">
+    </script>
+    <script type="text/javascript" src="~/Scripts/FrontEnd/respond.min.js">
+    </script>
+    <![endif]-->
+</head>
+
+
+<body class="our-club">
+    @Html.Partial("~/Views/Shared/FrontComponent/_Header.cshtml")
+
+    <div class="container d-flex justify-content-center">
+        <div class="card" style="width:350px; height:350px;">
+            <div class="card-body text-center">
+               welcome to profile
+            </div>
+        </div>
+    </div>
+
+
+    @Html.Partial("~/Views/Shared/FrontComponent/_Footer.cshtml")
+</body>
+
+</html>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using System.Web.Security;
 using TennisWeb.CF;
 using TennisWeb.Models;
 using TennisWeb.Services;
@@ -31,9 +32,17 @@ namespace TennisWeb.Controllers
 
             if (role != null && status == "active")
             {
-                Session["Role"] = role;
-                Session["Email"] = form["Email"];
-                return RedirectToAction("Dashboard", "User");
+                FormsAuthentication.SetAuthCookie(form["Email"], false);
+
+                
+                if (role == "admin")
+                {
+                    return RedirectToAction("Dashboard", "Admin");
+                }
+                else if(role == "user" || role == "player" || role == "coach")
+                {
+                    return RedirectToAction("Index", "FrontEnd");
+                }
             }
             else if(role == null && status == null)
             {
@@ -54,8 +63,9 @@ namespace TennisWeb.Controllers
         
         public ActionResult Logout()
         {
-            Session["Role"] = null;
-            Session["Email"] = null;
+            FormsAuthentication.SignOut();
+            Session.Clear();
+
             return RedirectToAction("Login");
         }
 
@@ -63,6 +73,7 @@ namespace TennisWeb.Controllers
         {
             return View();
         }
+
         public ActionResult Store(User user) { 
 
             if (ModelState.IsValid){

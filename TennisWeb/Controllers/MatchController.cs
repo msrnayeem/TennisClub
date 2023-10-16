@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TennisWeb.CF;
+using TennisWeb.Filter;
 using WebGrease.Css.Ast.Selectors;
 
 namespace TennisWeb.Controllers
@@ -20,6 +21,7 @@ namespace TennisWeb.Controllers
             return View(matches);
         }
 
+        [Admin]
         public ActionResult Create()
         {
             TempData["msg"] = TempData["SuccessMessage"] as string;
@@ -30,6 +32,7 @@ namespace TennisWeb.Controllers
             return View();
         }
 
+        [Admin]
         public ActionResult Store(Match match)
         {
             match.Status = false;
@@ -56,6 +59,7 @@ namespace TennisWeb.Controllers
             return View(match);
         }
 
+        [Admin]
         public ActionResult DeleteMatch(int id)
         {
             var resultMessage = Services.MatchService.DeleteMatch(id);
@@ -71,6 +75,7 @@ namespace TennisWeb.Controllers
             return RedirectToAction("Index");
         }
 
+        [Admin]
         public ActionResult UpdateMatch(int id)
         {
             var resultMessage = Services.MatchService.UpdateMatch(id);
