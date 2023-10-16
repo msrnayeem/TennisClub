@@ -1,0 +1,170 @@
+﻿@model List<TennisWeb.CF.Match>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+        Tennis Club || About Us
+    </title>
+
+
+
+
+
+    <!--[if lte IE 8]>
+    <link rel="stylesheet"  href="menuie.css" type="text/css" media="screen"/>
+    <link rel="stylesheet"  href="vmenuie.css" type="text/css" media="screen"/>
+    <![endif]-->
+    <!--[if IE 7]>
+    <style type="text/css" media="screen">
+    #ttr_vmenu_items  li.ttr_vmenu_items_parent {margin-left:-16px;font-size:0px;}
+    </style>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="~/Scripts/FrontEnd/html5shiv.js">
+    </script>
+    <script type="text/javascript" src="~/Scripts/FrontEnd/respond.min.js">
+    </script>
+    <![endif]-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/FrontEnd/style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/Content/FrontEnd/matchlist.css" type="text/css" media="screen" />
+</head>
+
+
+<body class="our-club">
+    @Html.Partial("~/Views/Shared/FrontComponent/_Header.cshtml")
+
+
+    <!-- Demo header-->
+    <section class="py-5 header">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md-3">
+                    <!-- Tabs nav -->
+                    <div class="nav flex-column nav-pills nav-pills-custom" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link mb-3 p-3 shadow active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                            <i class="fa fa-user-circle-o mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">Upcoming</span>
+                        </a>
+
+                        <a class="nav-link mb-3 p-3 shadow" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                            <i class="fa fa-calendar-minus-o mr-2"></i>
+                            <span class="font-weight-bold small text-uppercase">History</span>
+                        </a>
+                    </div>
+                </div>
+
+
+                <div class="col-md-9">
+                    <!-- Tabs content -->
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade shadow rounded bg-white show active p-5" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th>Start Time</th>
+                                        <th>End Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Any(m => m.Status == true))
+                                    {
+                                        foreach (var match in Model.Where(m => m.Status == false))
+                                        {
+                                            <tr>
+                                                <td class="text-center"><a href="@Url.Action("MatchDetails", "FrontEnd", new { id = match.Id })">Details</a></td>
+                                                <td>
+                                                    @(match.Status ? "Upcoming" : "Completed")
+                                                </td>
+                                                <td>@match.Time.ToString("dd MMMM, yyyy")</td>
+                                                <td>@match.Slot.Start</td>
+                                                <td>@match.Slot.End</td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-center">No upcoming matches.</td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th>Start Time</th>
+                                        <th>End Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Any(m => m.Status == false))
+                                    {
+                                        foreach (var match in Model.Where(m => m.Status == false))
+                                        {
+                                            <tr>
+                                                <td class="text-center"><a href="@Url.Action("MatchDetails", "FrontEnd", new { id = match.Id })">Details</a></td>
+                                                <td>
+                                                    @(match.Status ? "Upcoming" : "Completed")
+                                                </td>
+                                                <td>@match.Time.ToString("dd MMMM, yyyy")</td>
+                                                <td>@match.Slot.Start</td>
+                                                <td>@match.Slot.End</td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-center">No upcoming matches.</td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <br />
+    @Html.Partial("~/Views/Shared/FrontComponent/_Footer.cshtml")
+</body>
+
+</html>

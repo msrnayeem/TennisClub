@@ -9,6 +9,7 @@ using WebGrease.Css.Ast.Selectors;
 
 namespace TennisWeb.Controllers
 {
+   
     public class MatchController : Controller
     {
         // GET: Match
@@ -21,7 +22,7 @@ namespace TennisWeb.Controllers
             return View(matches);
         }
 
-        [Admin]
+        
         public ActionResult Create()
         {
             TempData["msg"] = TempData["SuccessMessage"] as string;
@@ -32,7 +33,6 @@ namespace TennisWeb.Controllers
             return View();
         }
 
-        [Admin]
         public ActionResult Store(Match match)
         {
             match.Status = false;
@@ -59,7 +59,6 @@ namespace TennisWeb.Controllers
             return View(match);
         }
 
-        [Admin]
         public ActionResult DeleteMatch(int id)
         {
             var resultMessage = Services.MatchService.DeleteMatch(id);
@@ -75,7 +74,6 @@ namespace TennisWeb.Controllers
             return RedirectToAction("Index");
         }
 
-        [Admin]
         public ActionResult UpdateMatch(int id)
         {
             var resultMessage = Services.MatchService.UpdateMatch(id);

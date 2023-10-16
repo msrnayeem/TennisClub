@@ -178,6 +178,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\CoachService.cs" />
+    <Compile Include="Services\FrontEndService.cs" />
     <Compile Include="Services\MatchPlayerService.cs" />
     <Compile Include="Services\MatchService.cs" />
     <Compile Include="Services\PlayerService.cs" />
@@ -488,6 +489,8 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\FrontEnd\bootstrap.css" />
+    <Content Include="Content\FrontEnd\matchlist.css" />
+    <Content Include="Content\FrontEnd\playerUpdate.css" />
     <Content Include="Content\FrontEnd\style.css" />
     <Content Include="Content\register.css" />
     <Content Include="favicon.ico" />
@@ -592,6 +595,11 @@
     <Content Include="Views\Shared\FrontComponent\_Footer.cshtml" />
     <Content Include="Views\FrontEnd\Contact.cshtml" />
     <Content Include="Views\FrontEnd\FrontProfile.cshtml" />
+    <Content Include="Views\FrontEnd\PlayerUpdate.cshtml" />
+    <Content Include="Views\FrontEnd\CoachUpdate.cshtml" />
+    <Content Include="Views\FrontEnd\Upcoming.cshtml" />
+    <Content Include="Views\FrontEnd\MatchDetails.cshtml" />
+    <Content Include="Views\FrontEnd\MatchForPlayer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

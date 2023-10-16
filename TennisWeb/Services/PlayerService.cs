@@ -19,11 +19,11 @@ namespace TennisWeb.Services
             }
         }
 
-        public static List<CoachInfo> GetActivePlayers()
+        public static List<PlayerInfo> GetActivePlayers()
         {
             using (var db = new TennisContext())
             {
-                return db.CoachInfoes
+                return db.PlayerInfoes
                    .Include(c => c.User)
                    .Where(c => c.User.Status == "active")
                    .ToList();
@@ -74,8 +74,43 @@ namespace TennisWeb.Services
             }
         }
 
+        public static PlayerInfo GetPlayerInfo(int id)
+        {
+            using (var db = new TennisContext())
+            {
+                // Retrieve PlayerInfo based on the provided id
+                PlayerInfo playerInfo = db.PlayerInfoes
+                    .Include(p => p.User) // Include related User data if necessary
+                    .SingleOrDefault(p => p.Id == id); // Filter by UserId
+
+                return playerInfo;
+            }
+        }
 
 
+        public static List<Match> GetPlayersMatchesList(int id)
+        {
+            using (var db = new TennisContext())
+            {
+                // Retrieve matches where the player participated
+                var matches = db.Matches
+                    .Include("Slot")
+                    .Include("CoachInfo")
+                    .Where(m => m.MatchPlayers.Any(mp => mp.PlayerId == id))
+                    .ToList();
+
+                return matches;
+            }
+        }
+
+        public static int GetPlayerId(int userId)
+        {
+            using (var db = new TennisContext())
+            {
+                var player = db.PlayerInfoes.FirstOrDefault(p => p.UserId == userId);
+                return player != null ? player.Id : 0; // Return 0 if player is not found
+            }
+        }
     }
 
 

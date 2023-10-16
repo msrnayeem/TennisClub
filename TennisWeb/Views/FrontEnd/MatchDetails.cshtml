@@ -1,0 +1,141 @@
+﻿@model TennisWeb.CF.Match
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+        Tennis Club || About Us
+    </title>
+
+
+
+
+
+    <!--[if lte IE 8]>
+    <link rel="stylesheet"  href="menuie.css" type="text/css" media="screen"/>
+    <link rel="stylesheet"  href="vmenuie.css" type="text/css" media="screen"/>
+    <![endif]-->
+    <!--[if IE 7]>
+    <style type="text/css" media="screen">
+    #ttr_vmenu_items  li.ttr_vmenu_items_parent {margin-left:-16px;font-size:0px;}
+    </style>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="~/Scripts/FrontEnd/html5shiv.js">
+    </script>
+    <script type="text/javascript" src="~/Scripts/FrontEnd/respond.min.js">
+    </script>
+    <![endif]-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/FrontEnd/style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="~/Content/FrontEnd/matchlist.css" type="text/css" media="screen" />
+    <style>
+        .body {
+            background-color: #f7f7f7;
+        }
+        .card {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+
+
+<body class="our-club">
+    @Html.Partial("~/Views/Shared/FrontComponent/_Header.cshtml")
+
+
+    @if (Model != null)
+    {
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-8">
+
+                    <div class="card mb-3 mt-3">
+
+                        <h5 class="card-header">Match Information</h5>
+                        <div class="card-body">
+                            <p class="card-text"><strong>Status:</strong> @(Model.Status ? "Upcoming" : "Completed")</p>
+                            <p class="card-text"><strong>Match ID:</strong> @Model.Id</p>
+
+                            <p class="card-text"><strong>Slot Name:</strong> @Model.Slot.Name</p>
+                            <p class="card-text"><strong>Start Time:</strong> @Model.Slot.Start</p>
+                            <p class="card-text"><strong>End Time:</strong> @Model.Slot.End</p>
+                            <p class="card-text"><strong>Date:</strong> @Model.Time.ToString("dd MMMM, yyyy")</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <h5 class="card-header">Coach Information</h5>
+                        <div class="card-body">
+
+                            <p class="card-text"><strong>Coach Name:</strong> @Model.CoachInfo.Name</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        @if (!string.IsNullOrEmpty(TempData["msg"] as string))
+                        {
+
+                            <div class="alert alert-success text-center">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                @TempData["msg"]
+                            </div>
+
+                        }
+                        <h5 class="card-header">Player Information</h5>
+                        <div class="card-body">
+                            @if (Model.MatchPlayers != null && Model.MatchPlayers.Any())
+                            {
+                                foreach (var player in Model.MatchPlayers)
+                                {
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <p class="card-text"><strong>Name:</strong> @player.PlayerInfo.Name</p>
+                                            <p class="card-text"><strong>Postion:</strong> @player.PlayerInfo.PlayingPosition</p>
+                                        </div>
+                                        @if (Model.Status)
+                                        {
+                                            <div class="col-md-4">
+                                                <a href="@Url.Action("Delete", "MatchPlayer", new { matchId =@Model.Id, playerId = player.PlayerInfo.Id })">remove</a>
+                                            </div>
+                                        }
+                                    </div>
+                                    
+                                }
+                            }
+                            else
+                            {
+                                <p class="card-text">No players found.</p>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <strong>Error:</strong> Match not found or an error occurred while retrieving match information.
+        </div>
+    }
+
+
+
+
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    <br /><br />
+    @Html.Partial("~/Views/Shared/FrontComponent/_Footer.cshtml")
+</body>
+
+</html>

@@ -10,7 +10,7 @@ using TennisWeb.Models;
 
 namespace TennisWeb.Controllers
 {
-    [Admin]
+    
     public class SlotController : Controller
     {
         // GET: Slot

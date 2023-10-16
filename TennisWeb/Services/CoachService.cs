@@ -85,5 +85,35 @@ namespace TennisWeb.Services
             }
         }
 
+        public static CoachInfo GetCoachInfo(int id)
+        {
+            using (var db = new TennisContext())
+            {
+                // Retrieve PlayerInfo based on the provided id
+                CoachInfo coachInfo = db.CoachInfoes
+                    .Include(p => p.User) // Include related User data if necessary
+                    .SingleOrDefault(p => p.Id == id); // Filter by UserId
+
+                return coachInfo;
+            }
+        }
+
+
+        public static List<Match> GetCoachMatchesList(int coachId)
+        {
+            using (var db = new TennisContext())
+            {
+                return db.Matches.Include("Slot").Where(m => m.CoachId == coachId).ToList();
+            }
+        }
+
+        public static int GetCoachId(int userId)
+        {
+            using (var db = new TennisContext())
+            {
+                return db.CoachInfoes.FirstOrDefault(c => c.UserId == userId).Id;
+            }
+        }
+
     }
 }

@@ -13,12 +13,7 @@ namespace TennisWeb.Controllers
 {
     public class AuthController : Controller
     {
-        // GET: Auth
-        public ActionResult Index()
-        {
-            return View();
-        }
-
+        
         public ActionResult Login()
         {
             TempData["ErrorMessage"] = Request.QueryString["error"];
@@ -37,7 +32,7 @@ namespace TennisWeb.Controllers
                 
                 if (role == "admin")
                 {
-                    return RedirectToAction("Dashboard", "Admin");
+                    return RedirectToAction("Dashboard", "User");
                 }
                 else if(role == "user" || role == "player" || role == "coach")
                 {

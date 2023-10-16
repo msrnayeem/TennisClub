@@ -1,4 +1,4 @@
-﻿
+﻿@model TennisWeb.CF.PlayerInfo
 <!DOCTYPE html>
 <html>
 
@@ -40,22 +40,148 @@
     <script type="text/javascript" src="~/Scripts/FrontEnd/respond.min.js">
     </script>
     <![endif]-->
+
+    <style>
+
+body{margin-top:20px;}
+.card-style1 {
+    box-shadow: 0px 0px 10px 0px rgb(89 75 128 / 9%);
+}
+.border-0 {
+    border: 0!important;
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+}
+
+section {
+    padding: 120px 0;
+    overflow: hidden;
+    background: #fff;
+}
+.mb-2-3, .my-2-3 {
+    margin-bottom: 2.3rem;
+}
+
+.section-title {
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+}
+.text-primary {
+    color: #ceaa4d !important;
+}
+.text-secondary {
+    color: #15395A !important;
+}
+.font-weight-600 {
+    font-weight: 600;
+}
+.display-26 {
+    font-size: 1.3rem;
+}
+
+
+.p-1-9 {
+    padding: 1.9rem;
+}
+
+.bg-secondary {
+    background: #15395A !important;
+}
+
+
+.pe-1-9, .px-1-9 {
+    padding-right: 1.9rem;
+}
+.ps-1-9, .px-1-9 {
+    padding-left: 1.9rem;
+}
+.pb-1-9, .py-1-9 {
+    padding-bottom: 1.9rem;
+}
+.pt-1-9, .py-1-9 {
+    padding-top: 1.9rem;
+}
+.mb-1-9, .my-1-9 {
+    margin-bottom: 1.9rem;
+}
+
+.rounded {
+    border-radius: 0.25rem!important;
+}
+    </style>
 </head>
 
 
 <body class="our-club">
     @Html.Partial("~/Views/Shared/FrontComponent/_Header.cshtml")
+    <section class="bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 mb-4 mb-sm-5">
+                    <div class="card card-style1 border-0">
+                        <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 mb-4 mb-lg-0">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="...">
+                                </div>
+                                <div class="col-lg-6 px-xl-10">
+                                    
+                                    <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+                                        <h3 class="h2 text-white mb-0">@ViewBag.Info.Name</h3>
+                                        <span class="text-primary text-capitalize">@ViewBag.Info.User.Role || @ViewBag.Info.Id</span>
+                                    </div>
+                                    <ul class="list-unstyled mb-1-9">
+                                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Position:</span> @ViewBag.Info.User.Role</li>
+                                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Experience:</span> 10 Years</li>
+                                        <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> @ViewBag.Info.User.Email</li>
+                                        <li class="display-28"><span class="display-26 text-secondary me-2 font-weight-600">Phone:</span> @ViewBag.Info.Phone</li>
+                                    </ul>
+                                    <ul class="social-icon-style1 list-unstyled mb-0 ps-0">
+                                        <li><a href="#!"><i class="ti-twitter-alt"></i></a></li>
+                                        <li><a href="#!"><i class="ti-facebook"></i></a></li>
+                                        <li><a href="#!"><i class="ti-pinterest"></i></a></li>
+                                        <li><a href="#!"><i class="ti-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                                <form action="@Url.Action("UpdateProfile", "FrontEnd")" method="post">
+                                    <!-- Hidden input fields for role and id parameters with fixed values -->
+                                    <input type="text" name="role" value="@ViewBag.Info.User.Role" hidden/>
+                                    <input type="number" name="id" value="@ViewBag.Info.Id" hidden/>
 
-    <div class="container d-flex justify-content-center">
-        <div class="card" style="width:350px; height:350px;">
-            <div class="card-body text-center">
-               welcome to profile
+                                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12 mb-4 mb-sm-5">
+                    <div>
+                        <span class="section-title text-primary mb-3 mb-sm-4">About Me</span>
+                        <p>Edith is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                        <p class="mb-0">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed.</p>
+                    </div>
+                </div>
+                
             </div>
         </div>
-    </div>
-
+    </section>
 
     @Html.Partial("~/Views/Shared/FrontComponent/_Footer.cshtml")
+
+
 </body>
 
 </html>

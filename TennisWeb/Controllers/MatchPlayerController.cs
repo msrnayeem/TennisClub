@@ -9,9 +9,10 @@ using TennisWeb.Filter;
 
 namespace TennisWeb.Controllers
 {
+    
     public class MatchPlayerController : Controller
     {
-        [Authorize]
+        
         public ActionResult Index(int id)
         {
             try
@@ -30,7 +31,7 @@ namespace TennisWeb.Controllers
 
                 var playersInfo = Services.MatchService.GetMatchInformation(id);
 
-                
+
                 return View(playersInfo);
             }
             catch (Exception ex)
@@ -42,7 +43,6 @@ namespace TennisWeb.Controllers
 
         //create a new match player
         [HttpPost]
-        [Admin]
         public ActionResult Store(FormCollection form)
         {
             // Get match ID from form data
@@ -83,7 +83,6 @@ namespace TennisWeb.Controllers
 
         }
 
-        [Admin]
         public ActionResult Delete(int matchId, int playerId)
         {
             try

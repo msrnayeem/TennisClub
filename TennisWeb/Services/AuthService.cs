@@ -40,5 +40,32 @@ namespace TennisWeb.Services
             }
         }
 
+        public static int GetId(string Email)
+        {
+            using (var db = new TennisContext())
+            {
+                var user = db.Users.SingleOrDefault(u => u.Email == Email);
+                return user?.Id ?? 0;
+            }
+        }
+
+
+
+        public static (int id, string role) GetIdRole(string Email)
+        {
+            using (var db = new TennisContext())
+            {
+                var user = db.Users.SingleOrDefault(u => u.Email == Email);
+                if (user != null)
+                {
+                    return (user.Id, user.Role);
+                }
+                else
+                {
+                    return (0, null);
+                }
+            }
+        }
+
     }
 }
