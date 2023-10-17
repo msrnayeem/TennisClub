@@ -119,5 +119,30 @@ namespace TennisWeb.Services
         }
 
 
+        public static object GetDashboardInfo()
+        {
+            //count in user table where Role=user
+            using(var db = new TennisContext())
+            {
+                var users = db.Users.Count();
+                var pending = db.Users.Where(u => u.Status == "inactive").Count();
+                var coaches = db.CoachInfoes.Count();
+                var players = db.PlayerInfoes.Count();
+                var slots = db.Slots.Count();
+                var upcomingMatch = db.Matches.Where(m => m.Status == true).Count();
+                var completedMatch = db.Matches.Where(m => m.Status == false).Count();
+                
+                return new
+                {
+                    users,
+                    pending,
+                    coaches,
+                    players,
+                    slots,
+                    upcomingMatch,
+                    completedMatch
+                };
+            }   
+        }
     }
 }

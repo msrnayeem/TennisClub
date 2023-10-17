@@ -10,8 +10,8 @@
         <div class="col-lg-4 col-6">
             <div class="small-box card">
                 <div class="inner">
-                    <h3>150</h3>
-                    <p>Total Players</p>
+                    <h3 id="users"> --- </h3>
+                    <p>Total Users</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-bag"></i>
@@ -23,7 +23,20 @@
         <div class="col-lg-4 col-6">
             <div class="small-box card">
                 <div class="inner">
-                    <h3>50</h3>
+                    <h3 id="pending"> --- </h3>
+                    <p>Pending Users</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer text-dark">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-6">
+            <div class="small-box card">
+                <div class="inner">
+                    <h3 id="coaches">--- </h3>
                     <p>Total Coach</p>
                 </div>
                 <div class="icon">
@@ -35,8 +48,8 @@
         <div class="col-lg-4 col-6">
             <div class="small-box card">
                 <div class="inner">
-                    <h3>50</h3>
-                    <p>Total Admin</p>
+                    <h3 id="players">--- </h3>
+                    <p>Total Players</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
@@ -47,7 +60,19 @@
         <div class="col-lg-4 col-6">
             <div class="small-box card">
                 <div class="inner">
-                    <h3>50</h3>
+                    <h3 id="slots">---</h3>
+                    <p>Total Slots</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="#" class="small-box-footer text-dark">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-4 col-6">
+            <div class="small-box card">
+                <div class="inner">
+                    <h3 id="completedMatch">---</h3>
                     <p>Total Match Held</p>
                 </div>
                 <div class="icon">
@@ -60,7 +85,7 @@
         <div class="col-lg-4 col-6">
             <div class="small-box card">
                 <div class="inner">
-                    <h3>50</h3>
+                    <h3 id="upcomingMatch">---</h3>
                     <p>Upcoming Match</p>
                 </div>
                 <div class="icon">
@@ -69,26 +94,67 @@
                 <a href="#" class="small-box-footer text-dark">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-        <div class="col-lg-4 col-lg-6">
-            <div class="small-box card">
-                @{
-                    // Retrieve values from Session variables
-                    var role = Session["Role"] as string;
-                    var email = Session["Email"] as string;
-                }
-
-                @if (role != null && email != null)
-                {
-                    <p>Welcome, @role! Your email is: @email</p>
-                }
-                else
-                {
-                    <p>Session variables not set or expired.</p>
-                }
-
-            </div> 
-        </div>
 
     </div>
 </div>
 <!-- /.card -->
+<script>
+    // Make an AJAX request to the DashboardInfo action using jQuery
+    $.ajax({
+        type: "GET", // HTTP method GET
+        url: "/User/DashboardInfo", // Replace ControllerName with your actual controller name
+        dataType: "json", // Expecting JSON response
+        success: function (response) {
+            // Handle the successful response here
+            if (response.success) {
+                var data = response.result;
+               
+                var ids = ["#users","#pending", "#coaches", "#players", "#slots", "#upcomingMatch", "#completedMatch"];
+
+                ids.forEach(function (id) {
+                    var property = id.substring(1);
+                    if (data.hasOwnProperty(property)) {
+                        var targetValue = data[property]; // Target value from the data object
+                        var currentValue = 0; // Initial value for shuffling animation
+
+                        // Start the shuffle animation for the current ID
+                        shuffleNumeric(id, targetValue, currentValue);
+                    } else {
+                        $(id).text("N/A");
+                    }
+                });
+
+                
+            } else {
+                // Handle the case where the server returns an error
+                console.error(response.error);
+            }
+        },
+        error: function (xhr, status, error) {
+            // Handle AJAX errors here
+            console.error("AJAX request failed: " + status + ", " + error);
+        }
+    });
+
+    function shuffleNumeric(id, targetValue, currentValue) {
+        if (currentValue <= targetValue) {
+            // Increment the current value randomly to create a shuffling effect
+            var randomIncrement = Math.floor(Math.random() * 5) + 1; // Random increment between 1 and 5
+            currentValue += randomIncrement;
+
+            // Update the text content with the current value
+            $(id).text(currentValue);
+
+            // Call the shuffleNumeric function recursively after a short delay
+            setTimeout(function () {
+                shuffleNumeric(id, targetValue, currentValue);
+            }, 50); // Adjust the delay time (in milliseconds) as needed
+        } else {
+            // Set the final text content to the target value when shuffling is done
+            $(id).text(targetValue);
+        }
+    }
+    
+
+
+</script>

@@ -44,5 +44,23 @@ namespace TennisWeb.Controllers
             return View(user);
         }
 
+
+        [HttpGet]
+        public JsonResult DashboardInfo()
+        {
+            try
+            {
+                var info = Services.UserService.GetDashboardInfo();
+                
+                return Json(new { success = true, result = info }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception details for debugging
+                Console.WriteLine(ex.Message);
+                return Json(new { success = false, error = "An error occurred while fetching coaches." }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
     }
 }
